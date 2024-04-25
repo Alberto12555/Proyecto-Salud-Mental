@@ -1,0 +1,377 @@
+<!DOCTYPE html> <!-- HTML5 -->
+<html> <!-- Inicio del documento HTML -->
+<head> <!-- Cabecera del documento -->
+	<title>Portal de Alumnos: Apoyo Emocional</title> <!-- Título de la página -->
+	<link rel="shortcut icon" href="img/logo-itcm-icono.ico">
+	<link rel="stylesheet" href="style.css">
+	<script src="carrusel.js"></script>
+	<script src="botonocultar.js"></script>
+	<script>
+		let botonesMostrar = document.querySelectorAll('.boton-mostrar');
+	
+		for (let i = 0; i < botonesMostrar.length; i++) {
+			botonesMostrar[i].addEventListener('click', function() {
+				let informacion = this.previousElementSibling;
+				if (informacion.style.display === 'none') {
+					informacion.style.display = 'block';
+				} else {
+					informacion.style.display = 'none';
+				}
+			});
+		}
+	</script>
+	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	  
+
+</head>
+<body> <!-- Cuerpo del documento -->
+
+	<header> <!-- Encabezado de la página -->
+		<div class="logo-container">
+			<img src="img/cropped-logo_sep_tecnm-2.png" alt="Logo Secretaria Mexico" class="logo">
+			<img src="img/logo-itcm.png" alt="Logo" class="logo1">
+		</div>
+		  
+		<h1 class="cambio-de-letra-titulo"> MONITOREO DE LA SALUD MENTAL EN UN AMBIENTE UNIVERSITARIO</h1>
+
+		
+		<nav> <!-- Menú de navegación -->
+			<ul>
+				<div class="navbar">
+					<a href="#info">Bienestar Integral</a>  
+					<a href="#salud-mental">Salud Mental Universitaria</a> 
+					<a href="#habitos">Hábitos</a> 
+					<a href="#explora-aprende">Explora y Aprende</a>
+					<a href="#saber-mas">Saber Más</a> 
+					<a href="#mapa-localizacion">Ubicación</a>
+					<a href="#horarios-ubicaciones">Horarios y Ubicaciones</a>
+				</div> 
+			</ul>
+		</nav>
+
+	</header>
+
+<!-- Menú sin scroll -->
+	<div class="navbar">
+		<a href="#info">Bienestar Integral</a>  
+		<a href="#especialidades">Salud Mental Universitaria</a> 
+		<a href="#habitos">Hábitos</a>
+		<a href="#explora-aprende">Explora y Aprende</a> 
+		<a href="#saber-mas">Saber Más</a> 
+		<a href="#mapa-localizacion">Ubicación</a>
+		<a href="#horarios-ubicaciones">Horarios y Ubicaciones</a>
+	  </div> 
+
+	<div class="portada-container">
+		<img src="img/banner1.jpg" alt="Portada-Overlay" class="portada-imagen">
+	</div>
+
+	<main> <!-- Contenido principal de la página -->
+
+		<section id="intro"> <!-- Sección de introducción -->
+			<h2>Monitoreo de la Salud Mental: Comprometidos con tu Bienestar Universitario</h2>
+			<p>En el Departamento de Sistemas Computacionales del Instituto Tecnológico, nos dedicamos a desarrollar soluciones innovadoras para el cuidado de la salud mental de los jóvenes universitarios. Nuestra herramienta busca detectar de manera oportuna posibles indicadores de depresión desde el primer semestre de la carrera.</p>
+			<p>Adoptamos un enfoque integral, considerando aspectos psicológicos, sociales y emocionales para promover un ambiente universitario saludable. Conscientes de que la etapa universitaria puede ser desafiante, nos esforzamos por proporcionar un sistema que no solo identifique posibles problemas, sino que también ofrezca recursos y apoyo a los estudiantes.</p>
+			<p>Nuestro objetivo específico es diseñar una interfaz web amigable y efectiva que permita a los estudiantes acceder fácilmente a herramientas y contenido de calidad relacionados con la salud mental. Creemos que la tecnología puede desempeñar un papel crucial en la detección temprana y el apoyo continuo.</p>
+			<p>En este proyecto, fusionamos la innovación tecnológica con la importancia de la salud mental, proporcionando una herramienta que trabaja en conjunto con el compromiso humano de nuestro equipo. Tu bienestar es nuestra prioridad, y avanzamos hacia un entorno universitario donde la tecnología contribuye activamente al cuidado integral de la salud mental.</p>
+			  
+<!-- carrusel -->
+
+<div class="slideshow-container">
+	<div class="mySlides fade">
+	  <img src="img/imagen1.jpg" style="max-width: 100%">
+	</div>
+  
+	<div class="mySlides fade">
+	  <img src="img/imagen2.jpg" style="width:100%">
+	</div>
+  
+	<div class="mySlides fade">
+	  <img src="img/imagen3.jpg" style="width:100%">
+	</div>
+  
+	<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+	<a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  <br>
+  
+  <div style="text-align:center">
+	<span class="dot" onclick="currentSlide(1)"></span>
+	<span class="dot" onclick="currentSlide(2)"></span>
+	<span class="dot" onclick="currentSlide(3)"></span>
+  </div>
+
+		</section>
+
+		<section id="info"> <!-- Sección de información general -->
+			<h2>Bienestar Integral: Navegando la Salud Mental y Psicológica en Todas las Etapas de la Vida"</h2>
+			<p>La salud mental y psicológica son componentes fundamentales de nuestro bienestar general. No se limitan únicamente a la ausencia de trastornos mentales, sino que abarcan un estado de equilibrio emocional, cognitivo y social que nos permite enfrentar los desafíos de la vida de manera efectiva.</p>
+			<p>La salud mental influye en todos los aspectos de nuestras vidas, desde nuestras relaciones interpersonales hasta nuestra capacidad para afrontar el estrés diario. Un estado mental saludable contribuye al desarrollo de habilidades de afrontamiento, toma de decisiones informada y relaciones interpersonales sólidas.</p>
+			<p>La atención a la salud mental es esencial en todas las etapas de la vida, pero adquiere especial relevancia durante los años de formación académica, como en el entorno universitario. La transición a la vida universitaria puede generar cambios significativos y desafiantes, lo que destaca la importancia de fomentar la resiliencia y la autoconciencia entre los jóvenes.</p>
+			<p>La salud mental no solo se trata de abordar los problemas cuando surgen, sino también de adoptar prácticas de autocuidado y promover entornos que respalden el bienestar emocional. La conciencia de uno mismo, la expresión emocional saludable y la búsqueda de apoyo cuando es necesario son elementos clave en la preservación de la salud mental.</p>
+			<p>La psicología desempeña un papel vital en este proceso, proporcionando herramientas y enfoques para comprender y mejorar nuestra mente y emociones. La atención a la salud mental y psicológica no solo beneficia al individuo, sino que también contribuye a comunidades más saludables y resilientes.</p>
+
+		</section>
+
+		<!-- Especialidades -->
+	
+		<section id="especialidades">
+			<h2 class="titulo-seccion">	Navegando la Salud Mental en la Universidad</h2>
+			<ul class="lista-especialidades">
+			  <li class="item-especialidad">
+				<img src="img/salud mental.jpg" alt="Imagen de Salud mental" class="imagen-especialidad">
+				<h3 class="titulo-que-es-la-salud-mental">¿Qué es la salud mental?</h3>
+				<p class="informacion"> 
+
+					En términos sencillos, tener una buena salud mental implica sentirse bien consigo mismo, ser capaz de lidiar con el estrés cotidiano, tomar decisiones informadas y tener relaciones interpersonales positivas. También implica la capacidad de adaptarse a cambios, expresar y gestionar emociones de manera saludable, y mantener una conexión significativa con los demás.<br><br>
+					
+					Cuidar la salud mental no se trata solo de abordar problemas cuando surgen, sino también de adoptar prácticas de autocuidado y buscar apoyo cuando sea necesario. Además, reconocer y respetar la diversidad de experiencias mentales es fundamental, ya que cada persona vive y afronta la vida de manera única.<br><br>
+					
+					La salud mental afecta todas las áreas de nuestras vidas, desde nuestras interacciones diarias hasta nuestro rendimiento académico y laboral. Es un aspecto integral de nuestro bienestar general y merece la misma atención y cuidado que nuestra salud física. En resumen, la salud mental es clave para vivir una vida plena y equilibrada.
+				</p>
+					<p>La salud mental se refiere al bienestar emocional y psicológico, abarcando cómo pensamos, sentimos y actuamos en la vida cotidiana.</p>
+			  </li>
+
+			  <li class="item-especialidad">
+				<img src="img/Enfermades mentales.jpg" alt="Imagen de Enfermedades mentales" class="imagen-especialidad">
+				<h3 class="titulo-que-son-las-enfermades-mentales">¿Qué son las enfermades mentales?</h3>
+				<p class="informacion">
+					Las enfermedades mentales, también conocidas como trastornos mentales o trastornos psiquiátricos, son condiciones que afectan el pensamiento, el comportamiento, las emociones y la capacidad de funcionar en la vida diaria. Estas condiciones pueden variar en gravedad y abarcar una amplia gama de síntomas.<br><br>
+					
+					Algunos ejemplos comunes de enfermedades mentales incluyen la depresión, la ansiedad, la esquizofrenia, el trastorno bipolar, el trastorno obsesivo-compulsivo (TOC), y los trastornos de la alimentación, entre otros. Estas condiciones pueden afectar a personas de cualquier edad, género, raza o nivel socioeconómico.<br><br>
+						
+					Es importante destacar que las enfermedades mentales no son simplemente debilidades personales o falta de voluntad. Tienen bases biológicas, genéticas y ambientales, y a menudo resultan de la interacción compleja de factores psicológicos, biológicos y sociales.<br><br>
+						
+					Las enfermedades mentales pueden interferir significativamente en la vida diaria de una persona, afectando su capacidad para trabajar, estudiar, mantener relaciones saludables y disfrutar de la vida. Sin embargo, muchas de estas condiciones son tratables con intervenciones adecuadas, que pueden incluir terapia, medicamentos, apoyo social y cambios en el estilo de vida.<br><br>
+						
+					La comprensión y el reconocimiento de las enfermedades mentales son fundamentales para eliminar el estigma asociado y promover un acceso adecuado a la atención y el tratamiento. La salud mental es tan importante como la salud física, y abordar las enfermedades mentales contribuye a un bienestar integral.
+				</p>
+					<p>Las enfermedades mentales son condiciones que afectan el pensamiento, las emociones y el comportamiento de una persona.</p>
+			  </li>
+
+			  <li class="item-especialidad">
+				<img src="img/rendimiento academico.jpg" alt="Imagen Rendimiento Academico" class="imagen-especialidad">
+				<h3 class="titulo-especialidad">¿Cómo impacta la salud mental en el rendimiento académico y el éxito estudiantil?</h3>
+				<p class="informacion">
+					El estrés crónico, por ejemplo, puede dificultar la retención de información y la toma de decisiones, lo que afecta la calidad del trabajo académico. La ansiedad puede generar bloqueos mentales que dificultan el rendimiento en exámenes o presentaciones. La depresión, por otro lado, puede llevar a la falta de motivación y energía, lo que impacta en la participación activa en el proceso educativo.<br><br>
+
+					El apoyo adecuado en términos de servicios de salud mental y un entorno educativo comprensivo pueden marcar la diferencia.<br><br>	
+				</p>
+					<p> Cuando alguien enfrenta desafíos en su salud mental, como el estrés, la ansiedad o la depresión, puede afectar negativamente su capacidad para concentrarse, recordar información y procesar nuevas ideas</p>
+			  </li>
+
+			  <li class="item-especialidad">
+				<img src="img/Advertencia Salud Mental.jpg" alt="Advertencia Salud Mental" class="imagen-especialidad">
+				<h3 class="titulo-especialidad">¿Cuáles son las señales de advertencia de problemas de salud mental en el entorno universitario?</h3>
+				<p class="informacion">
+					<b>Cambios en el comportamiento:</b> Si notas cambios significativos en el comportamiento de un compañero de clase o amigo, como retirarse de actividades sociales, evitar las interacciones o mostrar cambios extremos de humor, puede ser una señal de que están luchando con su salud mental.<br></br>
+
+					<b>Descuido personal:</b> La falta de cuidado personal, como no ducharse regularmente, descuidar la apariencia personal o el desorden extremo en su entorno, puede indicar que alguien está pasando por dificultades emocionales.<br></br>
+
+					<b>Cambios en el rendimiento académico:</b> Un repentino deterioro en el rendimiento académico, como bajas calificaciones, falta de participación en clase o ausencias frecuentes, puede ser un indicador de problemas de salud mental.<br></br>
+
+					<b>Expresiones de desesperanza o desesperación:</b> Hablar sobre sentimientos de desesperanza, inutilidad o desesperación, especialmente en las redes sociales o conversaciones personales, puede indicar que alguien está luchando emocionalmente.<br></br>
+
+					<b>Abuso de sustancias:</b> El uso excesivo de alcohol o drogas puede ser una forma de autoprescripción para hacer frente al estrés o a los problemas de salud mental. Observar un aumento en el consumo de sustancias puede ser una señal preocupante.<br></br>
+
+					<b>Aislamiento social:</b> Evitar actividades sociales, retirarse de amigos y familiares, o pasar mucho tiempo solo pueden ser indicadores de problemas de salud mental, especialmente si esta es una desviación del comportamiento anterior.<br></br>
+
+					<b>Expresiones de angustia emocional:</b> Hablar abiertamente sobre sentirse abrumado, estresado o incapaz de hacer frente a la presión puede ser una señal de que alguien necesita apoyo emocional adicional.<br></br>
+
+					
+				</p>
+				<p>En el entorno universitario, los estudiantes enfrentan una variedad de desafíos académicos, sociales y personales que pueden afectar su bienestar mental.<br></br>
+					La transición a la vida universitaria, el estrés académico, las relaciones interpersonales, la presión para tener éxito y otros factores pueden contribuir a problemas de salud mental entre los estudiantes universitarios.<br></br>
+					Identificar las señales de advertencia temprana de estos problemas es crucial para intervenir y ofrecer apoyo a quienes lo necesitan.</p>
+			  </li>
+
+			  <li class="item-especialidad">
+				<img src="img/Bienestar Emocional.jpg" alt="Bienestar Emocional" class="imagen-especialidad">
+				<h3 class="titulo-especialidad">¿Cómo fomentar la resiliencia y el bienestar emocional durante los años de formación académica?</h3>
+				<p class="informacion">
+					<b>Promover un entorno de apoyo:</b> Crea un entorno de apoyo en el que los estudiantes se sientan seguros y valorados. Fomenta la empatía, la comprensión y la inclusión, y promueve la comunicación abierta y el respeto mutuo entre los estudiantes, el personal docente y el personal administrativo.<br></br>
+
+					<b>Ofrecer recursos de salud mental:</b> Proporciona acceso a recursos de salud mental, como asesoramiento individual o grupal, talleres de manejo del estrés, grupos de apoyo y líneas directas de crisis. Asegúrate de que los estudiantes sepan cómo acceder a estos recursos y se sientan cómodos buscando ayuda cuando la necesiten.<br></br>
+
+					<b>Fomentar habilidades de afrontamiento:</b> Enseña a los estudiantes habilidades de afrontamiento efectivas para manejar el estrés, la ansiedad y los desafíos académicos. Esto puede incluir técnicas de relajación, meditación, mindfulness, resolución de problemas y pensamiento positivo.<br></br>
+
+					<b>Promover el equilibrio entre la vida académica y personal:</b> Ayuda a los estudiantes a encontrar un equilibrio saludable entre sus responsabilidades académicas y su bienestar personal. Anima la participación en actividades extracurriculares, el ejercicio regular, el tiempo de descanso y la socialización con amigos y familiares.<br></br>
+
+					<b>Crear oportunidades para la autorreflexión y el crecimiento personal:</b> Promueve la autorreflexión y el autoconocimiento alentando a los estudiantes a explorar sus fortalezas, valores y metas personales. Ofrece oportunidades para el desarrollo personal y profesional, como programas de liderazgo, pasantías y voluntariado.<br></br>
+
+					<b>Modelar comportamientos saludables:</b> Como educador, modela comportamientos saludables y hábitos de vida equilibrados. Sé un ejemplo de resiliencia, perseverancia y cuidado personal, y demuestra empatía y comprensión hacia los desafíos que enfrentan los estudiantes.<br></br>
+
+				</p>
+				<p>La resiliencia se refiere a la capacidad de adaptarse y recuperarse frente a la adversidad, el estrés y los desafíos de la vida. Al cultivar la resiliencia, los estudiantes pueden desarrollar habilidades y recursos internos que les permitan enfrentar los desafíos académicos y personales con confianza y determinación.<br></br>
+					Además, fomentar el bienestar emocional ayuda a los estudiantes a gestionar el estrés, mantener un equilibrio saludable entre la vida académica y personal, y cultivar relaciones significativas y de apoyo.</p>
+			  </li>
+
+			  <li class="item-especialidad">
+				<img src="img/Profesores.jpg" alt="Profesores" class="imagen-especialidad">
+				<h3 class="titulo-especialidad">¿Cómo pueden los profesores y personal universitario apoyar el bienestar mental de los estudiantes?</h3>
+				<p class="informacion">
+					<b>Crear un entorno de apoyo:</b> Fomentar un ambiente de clase inclusivo y de apoyo donde los estudiantes se sientan cómodos compartiendo sus preocupaciones y desafíos.<br></br>
+
+					<b>Conocer los recursos disponibles:</b> Estar familiarizado con los servicios de salud mental disponibles en el campus, como asesoramiento, servicios de bienestar estudiantil y grupos de apoyo, y referir a los estudiantes a estos recursos cuando sea necesario.<br></br>
+
+					<b>Promover la autoexpresión:</b> Animar a los estudiantes a expresar sus emociones y preocupaciones de manera abierta y respetuosa, ya sea en el aula, durante las horas de oficina o a través de comunicación por correo electrónico.<br></br>
+
+					<b>Ofrecer flexibilidad:</b> Ser flexible con los plazos de entrega y brindar opciones para adaptar el trabajo académico a las necesidades individuales de los estudiantes que enfrentan dificultades de salud mental.<br></br>
+
+					<b>Normalizar la conversación sobre salud mental:</b> Promover la conciencia y la comprensión de la salud mental entre los estudiantes al discutir abiertamente el tema en el aula y desafiar el estigma asociado con los problemas de salud mental.<br></br>
+
+					<b>Fomentar el autocuidado:</b> Educar a los estudiantes sobre la importancia del autocuidado y proporcionar recursos y estrategias prácticas para manejar el estrés y promover el bienestar emocional.<br></br>
+
+					<b>Estar disponible para escuchar:</b> Estar disponible para escuchar activamente a los estudiantes que necesitan apoyo emocional y proporcionar un espacio seguro para que expresen sus preocupaciones.<br></br>
+
+					<b>Colaborar con otros profesionales:</b> Trabajar en colaboración con el personal de servicios de salud mental y otros profesionales para brindar un enfoque integral de apoyo a los estudiantes.<br></br>
+
+				</p>
+				<p>En el entorno universitario, el bienestar mental de los estudiantes es una preocupación cada vez más importante.<br></br>
+					La presión académica, los desafíos sociales y la transición a la vida universitaria pueden tener un impacto significativo en la salud mental de los estudiantes.<br></br>
+					Al crear un entorno de apoyo, promover la conciencia sobre la salud mental y ofrecer recursos prácticos, pueden ayudar a los estudiantes a enfrentar los desafíos y prosperar en su experiencia universitaria.</p>
+			  </li>
+			</ul>
+		  </section>
+		  
+		  
+
+		<!-- Buenos habitos -->
+		<section id="habitos">
+			<center><h2 class="titulo-seccion"> Buenos Hábitos</h2></center>
+			<div class="packages">
+
+				<div class="package dieta">
+					<div class="buenos-habitos">
+						<img src="img/comida.gif" alt="Comida Kawaii">
+						<h3>Mantener una dieta equilibrada</h3>
+						<p>Consumir alimentos ricos en nutrientes como frutas, verduras, granos enteros y proteínas magras puede contribuir al bienestar mental.</p>
+					</div>
+				</div>
+				
+		  
+			  <div class="package descansar">
+				<div class="buenos-habitos">
+					<img src="img/dormir kawaii.gif" alt="Dormir Kawaii">
+					<h3>Descansar adecuadamente</h3>
+					<p>Dormir lo suficiente y mantener un horario regular de sueño puede mejorar la salud mental al reducir la irritabilidad, mejorar la concentración y fortalecer la resiliencia.
+					</p>
+				</div>
+			</div>
+			  
+			  <div class="package ejercicio">
+				<div class="buenos-habitos">
+					<img src="img/ejercicio kawaii2.gif" alt="Ejercicio Kawaii">
+					<h3>Ejercitarse</h3>
+					<p>La actividad física regular, como caminar, correr, practicar deportes o hacer yoga, puede ayudar a reducir el estrés, mejorar el estado de ánimo y aumentar la energía.</p>
+				</div>
+			  </div>
+			
+			  <div class="package relaciones">
+				<div class="buenos-habitos">
+					<img src="img/Amistad Kawaii.gif" alt="Amistad Kawaii">
+					<h3>Cuidar las relaciones interpersonales</h3>
+					<p>Mantener conexiones sociales significativas y cultivar relaciones saludables puede proporcionar apoyo emocional y aumentar la sensación de pertenencia y satisfacción en la vida.</p>
+				</div>
+			  </div>
+			
+			  <div class="package apoyo">
+				<div class="buenos-habitos">
+					<img src="img/Apoyo Emocional.gif" alt="Apoyo Emocional">
+					<h3>No está mal pedir ayuda cuando la necesitamos</h3>
+					<p>Hablar con alguien que sabe del tema, como un consejero o terapeuta, puede ser de gran ayuda. Ellos pueden escucharnos y darnos ideas para sentirnos mejor. No hay que sentir vergüenza, es bueno cuidar nuestra mente igual que cuidamos nuestro cuerpo.</p>
+				</div>
+			  </div>
+		  
+			</div>
+		  </section>
+	
+		  <section id="explora-aprende">
+
+			<center><h2 class="titulo-seccion"> Explora y Aprende</h2></center>
+			<div class="row">
+				<div class="column">
+					<div class="category">
+						<h3>Amistad y Pareja</h3>
+						<img src="img/amistad y amor.jpg" alt="Amistad y Pareja">
+						<ul>
+							<li><a href="#" id="amistad">Cómo mantener una amistad sólida</a></li>
+							<li><a href="#" id="pareja">Consejos para mejorar tu relación de pareja</a></li>
+						</ul>
+					</div>
+					<div class="category">
+						<h3>Familia</h3>
+						<img src="img/familia.jpg" alt="Familia">
+						<ul>
+							<li><a href="#" id="familia">Construyendo relaciones familiares saludables</a></li>
+							<li><a href="#" id="conflictos">Cómo lidiar con conflictos familiares</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="column">
+					<div class="category">
+						<h3>Autoestima</h3>
+						<img src="img/autoestimaa.jpg" alt="Autoestima">
+						<ul>
+							<li><a href="#" id="autoestima">Estrategias para aumentar tu autoestima</a></li>
+							<li><a href="#" id="superar_inseguridad">Cómo superar la inseguridad</a></li>
+						</ul>
+					</div>
+					<div class="category">
+						<h3>Estrés y Ansiedad</h3>
+						<img src="img/calma.jpg" alt="Estrés y Ansiedad">
+						<ul>
+							<li><a href="#" id="estres">Técnicas de manejo del estrés</a></li>
+							<li><a href="#" id="ansiedad">Cómo afrontar la ansiedad</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			
+			<div id="modal" class="modal">
+				<div class="modal-content">
+				  <span class="close">&times;</span>
+				  <div id="modal-image-container">
+					<img id="modal-image" src="" alt="">
+				  </div>
+				  <p id="modal-text"></p>
+				</div>
+			  </div>
+
+			<script src="ventana modal.js"></script>		
+			
+		</section>
+
+
+		<section id="saber-mas"> <!-- Sección de Conozca su salud -->
+			<h2>¡Encuentra Apoyo Psicológico!</h2>
+			<p>En esta sección, hemos recopilado una lista de enlaces a recursos gubernamentales que ofrecen ayuda psicológica gratuita y confiable. Sabemos lo importante que es cuidar nuestra salud mental, especialmente en tiempos difíciles, y queremos proporcionarte acceso fácil a servicios y programas que pueden brindarte el apoyo que necesitas.<br></br>
+
+				Explora los enlaces a continuación para encontrar información sobre servicios de asesoramiento, líneas de ayuda telefónica, recursos en línea y programas de intervención psicológica ofrecidos por agencias gubernamentales. Ya sea que estés buscando orientación para enfrentar el estrés, la ansiedad, la depresión u otros desafíos emocionales, estos recursos están diseñados para ayudarte a ti y a tus seres queridos a superar obstáculos y recuperar el bienestar emocional.<br></br>
+				
+				Recuerda que no estás solo. Si necesitas ayuda, no dudes en aprovechar estos recursos y buscar el apoyo que mereces. Tu bienestar mental es una prioridad, y estamos aquí para ayudarte a encontrar el camino hacia una salud mental positiva y resiliente.</p>
+			
+			<a href="https://iapa.cdmx.gob.mx/comunicacion/nota/plan-sectorial-de-salud-mental-y-adicciones">Plan sectorial de salud mental y adicciones</a><br></br>
+			<a href="https://www.gob.mx/tramites/ficha/atencion-psicologica-a-distancia-en-salud-mental-y-adicciones/CIJ3570">Atención psicológica a distancia en salud mental y adicciones</a><br></br>
+			<a href="https://ayudaparadepresion.org.mx/?gad_source=1&gclid=CjwKCAiAlJKuBhAdEiwAnZb7laPimQcWF8Q9tV4rYaGia9d-rhNj8zdfF-Pa6LbAlRKDz1ySgqaAWBoC2JQQAvD_BwE">¡Realiza un test sobre la depresión!</a>
+		</section>
+
+		<div id="mapa-localizacion" style="text-align: center; margin-bottom: 40px;"> <h1 style="margin-bottom: 30px;">Mapa y Localización</h1> <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3692.584442901508!2d-97.84912779983492!3d22.255840440095632!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d7f9e9e708d70f%3A0x724b889d64ae3c3e!2sInstituto%20Tecnol%C3%B3gico%20de%20Ciudad%20Madero%20campus%202!5e0!3m2!1ses-419!2smx!4v1685415476307!5m2!1ses-419!2smx" width="400" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> </div>
+		<div class="mapa-espacio"></div>
+
+	</main>
+
+	<footer> <!-- Pie de página -->
+		
+			<h2 id="horarios-ubicaciones">Horarios y Ubicaciones</h2>
+			<p>Lunes a Viernes: 9:00 am - 8:00 pm</p>
+			<p>Sábado: 9:00 am - 5:00 pm</p>
+			<p>Domingo: Cerrado</p>
+			<p>Ubicaciones: 89440, Juventino Rosas 114, Los Mangos, Cd Madero, Tamps.</p>
+		</section>
+
+
+</body> <!-- Cierre del cuerpo del documento -->
+</html> <!-- Cierre del documento HTML -->
+
