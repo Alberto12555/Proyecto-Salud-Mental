@@ -2,6 +2,7 @@
 
 body {
 font-family: Arial, sans-serif;
+text-align: justify;
 margin: 0;
 padding: 0;
 background-color: #e6e3e3;
@@ -10,7 +11,7 @@ background-color: #e6e3e3;
 /* Estilos para el encabezado */
 
 header {
-  background-color:#0072C6; 
+  background-color: #1B396A; 
   color: rgb(255, 255, 255);
   padding: 10px;
   height: 75px;
@@ -116,9 +117,8 @@ margin-left: 20px;
 /* Estilos para el pie de página */
 
 footer {
-background-color: #0072C6;
+background-color: #807E82;
 color: white;
-padding: 30px;
 text-align: center;
 }
 
@@ -518,7 +518,7 @@ li:hover {
 /* Contenedor del menú  incio*/
 .navbar {   
   list-style: none;            
-  background-color: #cec0c0;  
+  background-color: #807E82; 
   text-align: center;         
   padding: 1px;               
 }
