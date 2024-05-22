@@ -9,6 +9,9 @@ if (isset($_SESSION['username'])) {
     exit();
 }
 
+// Variable para almacenar el mensaje de error
+$error_message = "";
+
 // Verificar si se envió el formulario de inicio de sesión estándar
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $servername = "localhost";
@@ -35,19 +38,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     if ($result->num_rows > 0) {
         // Inicio de sesión exitoso
         $_SESSION['username'] = $username;
-        echo "Login exitoso. Redirigiendo...";
         header("Location: blog.php"); // Redirige a tu página principal o panel de control
         exit();
     } else {
         // Login fallido
-        echo "Usuario o contraseña incorrectos.";
+        $error_message = "Usuario o contraseña incorrectos.";
     }
 
     $conn->close();
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['anonymous'])) {
     // Iniciar sesión anónima
     $_SESSION['username'] = 'Anónimo';
-    echo "Login anónimo exitoso. Redirigiendo...";
     header("Location: blog.php"); // Redirige a tu página principal o panel de control
     exit();
 }
@@ -57,23 +58,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
   <title>Iniciar Sesión</title>
-  <link rel="icon" href="img/logo-itcm-icono.ico" type="image/x-icon">
+  <link rel="icon" href="../img/logo-itcm-icono.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
 </head>
 
 <body>
   <div id="encabezado">
-    <h1>Salud mental en un ambiente universitario • Iniciar Sesión</h1>
-    <img src="img/logo-itcm.png" alt="Logo ITCM" class="logo-img">
-    <img src="img/pleca_tecnm.jpg" alt="Logo TECNM" class="logo-img-tecnm">
+    <h1>Blog • Iniciar sesión</h1>
+		<a href="https://www.cdmadero.tecnm.mx">
+			<img src="../img/logo-itcm.png" alt="Logo ITCM" class="logo-img">
+		</a>
+		<a href="https://www.tecnm.mx">
+			<img src="../img/pleca_tecnm.jpg" alt="Logo TECNM" class="logo-img-tecnm">
+		</a>
   </div>
 
   <div class="navbar">
-    <a href="index.html"><img src="img/home white.png" alt="Inicio" width="38px"></a> 
+    <a href="../index.html"><img src="../img/home white.png" alt="Inicio" width="38px"></a> 
   </div> 
-  
+
+  <?php
+  if (!empty($error_message)) {
+      echo "<div class='mensaje-error'>$error_message</div>";
+  }
+  ?>
   <form method="post" class="formulario-login">
     <label for="username">Usuario:</label>
     <input type="text" id="username" name="username" required>
@@ -82,17 +92,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <input type="password" id="password" name="password" required>
 
     <button type="submit" class="boton" name="login">Iniciar sesión</button>
-
-    <div class="mensaje-error" id="mensaje-error" style="display: none;">
-      Usuario o contraseña incorrectos. Inténtalo de nuevo.
-</div>
   </form>
+
   <div class="mensaje-registro">
     <p>¿No tienes una cuenta? <a href="registro.php">Regístrate aquí</a>.</p>
   </div>
-    <!-- Formulario para inicio de sesión anónima -->
-    <form method="post" class="formulario-login">
-    <button type="submit" class="boton" name="anonymous">Iniciar sesión como Anónimo</button>
+
+  <!-- Formulario para inicio de sesión anónima -->
+  <form method="post" class="formulario-login">
+    <button type="submit" class="boton" name="anonymous">Iniciar sesión como anónimo</button>
   </form>
 </body>
 </html>

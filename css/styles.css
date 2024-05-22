@@ -93,7 +93,7 @@ button:hover {
 }
 
 .formulario-login {
-  margin-top: 100px;
+  margin-top: 60px;
   text-align: center;
 }
 
@@ -104,8 +104,25 @@ button:hover {
 }
 
 .mensaje-error {
+  display: block;
   color: #ff0000;
-  margin-top: 10px;
+  /* Rojo para el texto */
+  padding: 10px;
+  /* Relleno */
+  border: 1px solid #ff0000;
+  /* Borde rojo */
+  border-radius: 5px;
+  /* Bordes redondeados */
+  background-color: #ffe6e6;
+  /* Fondo rojo claro */
+  text-align: center;
+  /* Centra el texto */
+  width: 80%;
+  /* Ancho del contenedor */
+  max-width: 400px;
+  /* Ancho máximo */
+  margin: 20px auto;
+  /* Márgenes automáticos para centrar */
 }
 
 /* css antiguo abajo*/
@@ -212,6 +229,8 @@ footer {
   bottom: 0;
   width: 100%;
   margin: 0;
+  padding: 1px 0;
+  /* Ajusta el relleno superior e inferior según sea necesario */
 }
 
 /* Estilos para los bloques de cotización */
@@ -764,33 +783,35 @@ li:hover {
 }
 
 @media only screen and (max-width: 768px) {
-  .logo-img {
-    right: 10px;
-    width: 60px;
-    opacity: 0;
-  }
 
+  .logo-img,
   .logo-img-tecnm {
-    left: 10px;
-    width: 120px;
-    opacity: 0;
+    display: none;
+    /* Oculta las imágenes en dispositivos móviles */
   }
 
   .navbar {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    justify-content: center;
     background-color: #1B396A;
     width: 100%;
     color: white;
     text-align: center;
     position: relative;
-    /* Añade posición relativa para que los elementos absolutos respeten este contenedor */
+    height: 40px;
+  }
+
+  .navbar a img {
+    vertical-align: middle;
+    max-width: 100px;
+    height: auto;
+    margin-right: 4px;
   }
 
   .menu-toggle {
     display: block;
-    /* Muestra el botón "Menú" en pantallas pequeñas */
     color: #fff;
     text-decoration: none;
     font-size: 25px;
@@ -801,15 +822,11 @@ li:hover {
 
   .menu-items {
     display: none;
-    /* Oculta los elementos del menú por defecto en pantallas pequeñas */
     position: absolute;
-    /* Coloca los elementos del menú en posición absoluta */
     top: 100%;
-    /* Ajusta la posición desde la parte superior del navbar */
     left: 0;
     width: 100%;
     background-color: #1B396A;
-    /* Ajusta el color de fondo */
     flex-direction: column;
     align-items: center;
     z-index: 1;

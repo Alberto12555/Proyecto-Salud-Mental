@@ -4,39 +4,16 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="styles.css">
+	<link rel="stylesheet" href="css/styles.css">
 	<title>Portal de alumnos: Apoyo emocional</title>
 	<link rel="icon" href="img/logo-itcm-icono.ico" type="image/x-icon">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
-	<script src="carrusel.js"></script>
-	<script src="botonocultar.js"></script>
-	<script>
-		let botonesMostrar = document.querySelectorAll('.boton-mostrar');
-
-		for (let i = 0; i < botonesMostrar.length; i++) {
-			botonesMostrar[i].addEventListener('click', function () {
-				let informacion = this.previousElementSibling;
-				if (informacion.style.display === 'none') {
-					informacion.style.display = 'block';
-				} else {
-					informacion.style.display = 'none';
-				}
-			});
-		}
-	</script>
-	<script>
-		document.addEventListener('DOMContentLoaded', function () {
-			const menuToggle = document.querySelector('.menu-toggle');
-			const menuItems = document.querySelector('.menu-items');
-
-			menuToggle.addEventListener('click', function () {
-				if (window.innerWidth <= 768) {
-					menuItems.classList.toggle('show');
-				}
-			});
-		});
-	</script>
+	<script src="js/carrusel.js"></script>
+	<script src="js/botonocultar.js"></script>
+	<script src="js/botonesmostrar.js"></script>
+	<script src="js/mostrarmenu.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 	<div id="encabezado">
 		<h1>Salud mental en un ambiente universitario</h1>
 		<a href="https://www.cdmadero.tecnm.mx">
@@ -58,7 +35,7 @@
 			<a href="#habitos">Buenos hábitos</a>
 			<a href="#explora-aprende">Explora y aprende</a>
 			<a href="#saber-mas">Saber más</a>
-			<a href="blog.php">Blog</a>
+			<a href="php/blog.php">Blog</a>
 		</div>
 	</div>
 
@@ -522,7 +499,8 @@
 			Sábado: 9:00 am - 5:00 pm<br>
 			Domingo: Cerrado<br>
 			Ubicaciones: 89440, Juventino Rosas 114, Los Mangos, Cd Madero, Tamps.</h5>
-		</section>
+	</footer>
+
 </body>
 
 </html>
