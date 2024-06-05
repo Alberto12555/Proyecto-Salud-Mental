@@ -782,6 +782,34 @@ li:hover {
   /* Oculta el botón "Menú" por defecto */
 }
 
+/* Main Content Styles */
+#preguntas {
+  max-width: 800px;
+  margin: 2em auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.pregunta {
+  margin-bottom: 1.5em;
+}
+
+.pregunta h3 {
+  margin-top: 0;
+}
+
+.respuestas {
+  margin-top: 1em;
+  padding-left: 20px;
+  border-left: 3px solid #0066cc;
+}
+
+.respuestas p {
+  margin: 0.5em 0;
+}
+
 @media only screen and (max-width: 768px) {
 
   .logo-img,
