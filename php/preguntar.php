@@ -5,7 +5,7 @@ if (isset($_SESSION['username'])) {
     $servername = "localhost";
     $username_db = "root";
     $password_db = "";
-    $dbname = "usuarios";
+    $dbname = "saludmental";
 
     $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 
@@ -28,6 +28,8 @@ if (isset($_SESSION['username'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/blog.css">
+  <link rel="stylesheet" href="css/styles_mobile.css">
   <title>Blog</title>
   <link rel="icon" href="../img/logo-itcm-icono.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">

@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $servername = "localhost";
     $username_db = "root"; // Usuario por defecto en XAMPP
     $password_db = ""; // Contraseña por defecto en XAMPP
-    $dbname = "usuarios"; // Nombre de la base de datos que has creado en PHPMyAdmin
+    $dbname = "saludmental"; // Nombre de la base de datos que has creado en PHPMyAdmin
 
     // Establecer la conexión
     $conn = new mysqli($servername, $username_db, $password_db, $dbname);
@@ -59,6 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="css/styles_mobile.css">
   <title>Iniciar Sesión</title>
   <link rel="icon" href="../img/logo-itcm-icono.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
