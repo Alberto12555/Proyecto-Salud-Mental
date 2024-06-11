@@ -1,3 +1,4 @@
+/* Estilos para las preguntas */
 #preguntas {
     margin: 20px auto;
     padding: 20px;
@@ -22,6 +23,8 @@
 
 .pregunta h3 {
     margin: 0 0 10px;
+    font-size: 16px;
+    font-weight: normal;
 }
 
 .pregunta p {
@@ -29,19 +32,20 @@
     color: #666;
 }
 
-.pregunta form {
+/* Estilos para los botones dentro de cada pregunta */
+.botones-pregunta {
+    display: flex;
+    justify-content: flex-start;
+    /* Alinea los botones al inicio del contenedor */
     margin-top: 10px;
 }
 
-.pregunta form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    resize: none;
+.botones-pregunta form {
+    margin-right: 10px;
+    /* Espacio entre los formularios de los botones */
 }
 
-.pregunta form button {
+.botones-pregunta button {
     background-color: #1B396A;
     color: white;
     border: none;
@@ -50,10 +54,11 @@
     cursor: pointer;
 }
 
-.pregunta form button:hover {
+.botones-pregunta button:hover {
     background-color: #144573;
 }
 
+/* Estilos para las respuestas */
 .respuestas {
     margin-top: 10px;
     padding: 10px;
@@ -65,6 +70,7 @@
     margin: 5px 0;
 }
 
+/* Estilos para el formulario general */
 form {
     display: flex;
     flex-direction: column;
@@ -94,4 +100,146 @@ form button {
 
 form button:hover {
     background-color: #144573;
+}
+
+/* Estilos para la imagen de perfil del usuario */
+.user-foto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Estilos para el formulario de edición de perfil */
+#editarperfil {
+    margin-top: 50px;
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+#editarperfil label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#editarperfil input[type="text"],
+#editarperfil input[type="file"] {
+    width: calc(100% - 16px);
+    /* Ajusta el ancho para el padding */
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+#editarperfil input[type="email"] {
+    width: calc(100% - 16px);
+    /* Ajusta el ancho para el padding */
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    text-align: center;
+    border: 1px solid #ddd;
+    /* Agrega el borde específicamente para el tipo email */
+    border-radius: 5px;
+}
+
+#editarperfil button {
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #1B396A;
+}
+
+#editarperfil button:hover {
+    background-color: #144573;
+}
+
+#editarperfil .user-foto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.mensaje-exito {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.mensaje-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+textarea {
+    padding: 10px;
+    /* Espaciado interno */
+    border: 1px solid #ddd;
+    /* Borde del área de texto */
+    border-radius: 5px;
+    /* Bordes redondeados */
+    margin-bottom: 10px;
+    /* Espacio inferior */
+    resize: vertical;
+    /* Permite ajustar la altura verticalmente */
+    min-height: 50px;
+    /* Altura mínima del área de texto */
+    font-size: 14px;
+    /* Tamaño de fuente */
+    line-height: 1.5;
+    /* Espaciado entre líneas */
+}
+
+/* Estilos para las respuestas */
+.respuestas {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.respuestas p {
+    margin: 5px 0;
+}
+
+/* Estilos para la información del usuario en las respuestas */
+.respuesta .user-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.respuesta .user-foto {
+    width: 50px; /* Reducimos el tamaño de la foto */
+    height: 50px; /* Reducimos el tamaño de la foto */
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.respuesta .user-details {
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+}
+
+.respuesta .user-details p {
+    margin: 5px 0;
+    color: #666;
+    font-size: 14px; /* Reducimos el tamaño de fuente */
 }

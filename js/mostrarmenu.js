@@ -1,10 +1,7 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const menuToggle = document.querySelector('.menu-toggle');
-    const menuItems = document.querySelector('.menu-items');
+// menu-toggle.js
 
-    menuToggle.addEventListener('click', function () {
-        if (window.innerWidth <= 768) {
-            menuItems.classList.toggle('show');
-        }
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelector('.menu-toggle').addEventListener('click', function() {
+        document.querySelector('.navbar').classList.toggle('active');
     });
 });

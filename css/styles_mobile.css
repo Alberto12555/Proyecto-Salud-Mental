@@ -1,31 +1,44 @@
-  @media only screen and (max-width: 768px) {
-
-    .logo-img,
-    .logo-img-tecnm {
+@media only screen and (max-width: 768px) {
+  /* Ocultar las imágenes del logo en el encabezado */
+  .logo-img,
+  .logo-img-tecnm {
       display: none;
-    }
+  }
 
-    .navbar {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: center;
-      background-color: #1B396A;
-      width: 100%;
-      color: white;
-      text-align: center;
-      position: relative;
-      height: 40px;
-    }
+  .navbar {
+    flex-direction: column; /* Cambia a dirección vertical */
+    position: relative;
+}
 
-    .navbar a img {
-      vertical-align: middle;
-      max-width: 100px;
-      height: auto;
-      margin-right: 4px;
-    }
+.navbar a:not(:last-child) {
+    margin-bottom: 10px; /* Espaciado entre elementos */
+}
 
-    .menu-toggle {
+.navbar .menu-items {
+    display: none;
+    position: absolute;
+    top: 60px; /* Alinea con la parte inferior del navbar */
+    left: 0;
+    width: 100%;
+    background-color: #1B396A;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+.navbar .menu-items a {
+    padding: 10px;
+    width: 100%;
+    text-align: center;
+    transition: 0.4s;
+}
+
+.navbar.active .menu-items {
+    display: flex; /* Muestra la lista vertical al activar el toggle */
+}
+
+  /* Estilos para el icono del menú */
+  .menu-toggle {
       display: block;
       color: #fff;
       text-decoration: none;
@@ -33,9 +46,10 @@
       padding: 10px;
       border-radius: 20px;
       cursor: pointer;
-    }
+  }
 
-    .menu-items {
+  /* Estilos para el menú desplegable */
+  .menu-items {
       display: none;
       position: absolute;
       top: 100%;
@@ -45,16 +59,26 @@
       flex-direction: column;
       align-items: center;
       z-index: 1;
-    }
+  }
 
-    .menu-items a {
+  /* Estilos para cada elemento del menú desplegable */
+  .menu-items a {
       display: block;
       width: 100%;
       text-align: center;
       color: #fff;
       text-decoration: none;
-      font-size: 25px;
+      font-size: 20px; /* Reduce el tamaño del texto del menú */
       padding: 10px;
       transition: 0.4s;
-    }
   }
+
+  /* Ajuste de estilos específicos para imágenes dentro del menú */
+  .menu-items a img {
+      vertical-align: middle;
+      max-width: 80px; /* Ajusta el tamaño máximo de las imágenes */
+      height: auto;
+      margin-right: 4px;
+  }
+
+}

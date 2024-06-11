@@ -18,12 +18,17 @@ if (isset($_SESSION['username'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
+    // Configurar la zona horaria
+    date_default_timezone_set('America/Mexico_City');
+
     // Obtener la respuesta y el ID de la pregunta del formulario
     $id_pregunta = $conn->real_escape_string($_POST['id_pregunta']);
     $respuesta = $conn->real_escape_string($_POST['respuesta']);
+    $usuario = $_SESSION['username'];
+    $fecha_respuesta = date('Y-m-d H:i:s');
 
     // Insertar la respuesta en la base de datos
-    $sql = "INSERT INTO respuestas (id_pregunta, respuesta) VALUES ('$id_pregunta', '$respuesta')";
+    $sql = "INSERT INTO respuestas (id_pregunta, respuesta, usuario, fecha_respuesta) VALUES ('$id_pregunta', '$respuesta', '$usuario', '$fecha_respuesta')";
 
     if ($conn->query($sql) === TRUE) {
         // Redirigir a blog.php después de guardar la respuesta

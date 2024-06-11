@@ -37,7 +37,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
     if ($result->num_rows > 0) {
         // Inicio de sesión exitoso
-        $_SESSION['username'] = $username;
+        $row = $result->fetch_assoc();
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['nombre'] = $row['nombre']; // Guarda el nombre del usuario en la sesión
+        $_SESSION['apellidos'] = $row['apellidos']; // Guarda los apellidos del usuario en la sesión
         header("Location: blog.php"); // Redirige a tu página principal o panel de control
         exit();
     } else {
@@ -49,18 +52,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['anonymous'])) {
     // Iniciar sesión anónima
     $_SESSION['username'] = 'Anónimo';
+    $_SESSION['nombre'] = ''; // Puedes definir un nombre anónimo si lo deseas
+    $_SESSION['apellidos'] = ''; // Puedes definir apellidos anónimos si lo deseas
     header("Location: blog.php"); // Redirige a tu página principal o panel de control
     exit();
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/login.css">
-  <link rel="stylesheet" href="css/styles_mobile.css">
+  <link rel="stylesheet" href="../css/styles_mobile.css">
   <title>Iniciar Sesión</title>
   <link rel="icon" href="../img/logo-itcm-icono.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
