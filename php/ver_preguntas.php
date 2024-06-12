@@ -55,11 +55,26 @@ $conn->close();
     </a>
 </div>
 <div class="navbar">
-    <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a>
-    <a href="mis_preguntas.php">Mis preguntas</a>
-    <a href="buscar_usuario.php">Buscar usuario</a>
-    <a href="logout.php">Cerrar sesión</a>
+    <!-- Menú principal visible en dispositivos de escritorio -->
+    <div class="menu-items">
+        <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a>
+        <a href="mis_preguntas.php">Mis preguntas</a>
+        <a href="buscar_usuario.php">Buscar usuario</a>
+        <a href="logout.php">Cerrar sesión</a>
+    </div>
+
+    <!-- Menú desplegable para dispositivos móviles -->
+    <div class="dropdown">
+        <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a>
+        <button onclick="toggleDropdown()">Opciones</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="mis_preguntas.php">Mis preguntas</a>
+            <a href="buscar_usuario.php">Buscar usuario</a>
+            <a href="logout.php">Cerrar sesión</a>
+        </div>
+    </div>
 </div>
+
 
 <?php
 if ($result->num_rows > 0) {

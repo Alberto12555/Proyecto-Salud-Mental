@@ -14,7 +14,10 @@ if (isset($_SESSION['username'])) {
     }
 
     $username = $_SESSION['username'];
-
+    if (!isset($_SESSION['username']) || strpos($_SESSION['username'], 'anonimo#') !== false) {
+      header("Location: login.php");
+      exit();
+  }
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nombre = $_POST['nombre'];
         $apellidos = $_POST['apellidos'];

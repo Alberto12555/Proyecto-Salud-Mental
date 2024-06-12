@@ -19,7 +19,7 @@ if ($conn->connect_error) {
 
 $search = $_POST['search'];
 
-$sql = "SELECT * FROM usuarios WHERE nombre LIKE ? OR apellidos LIKE ?";
+$sql = "SELECT * FROM usuarios WHERE (nombre LIKE ? OR apellidos LIKE ?) AND username NOT LIKE 'anonimo%'";
 $stmt = $conn->prepare($sql);
 $searchTerm = "%$search%";
 $stmt->bind_param("ss", $searchTerm, $searchTerm);

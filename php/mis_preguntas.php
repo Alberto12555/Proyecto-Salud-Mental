@@ -47,6 +47,8 @@ while ($row_respuesta = $result_respuestas->fetch_assoc()) {
     $respuestas_por_pregunta[$id_pregunta][] = $row_respuesta;
 }
 
+$es_anonimo = strpos($username, 'anonimo#') !== false;
+
 $conn->close();
 ?>
 
@@ -72,11 +74,36 @@ $conn->close();
     </a>
 </div>
 <div class="navbar">
-    <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a>
-    <a href="preguntar.php">Realizar pregunta</a>
-    <a href="editarperfil.php">Editar perfil</a>
-    <a href="logout.php">Cerrar sesión</a>
+    <!-- Menú principal visible en dispositivos de escritorio -->
+    <div class="menu-items">
+        <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a>
+        <a href="preguntar.php">Realizar pregunta</a>
+        <?php
+        // Mostrar editar perfil solo si no es un usuario anónimo
+        if (isset($_SESSION['username']) && !$es_anonimo) {
+            echo '<a href="editarperfil.php">Editar perfil</a>';
+        }
+        ?>
+        <a href="logout.php">Cerrar sesión</a>
+    </div>
+
+    <!-- Menú desplegable para dispositivos móviles -->
+    <div class="dropdown">
+        <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a>
+        <button onclick="toggleDropdown()">Opciones</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="preguntar.php">Realizar pregunta</a>
+            <?php
+        // Mostrar editar perfil solo si no es un usuario anónimo
+        if (isset($_SESSION['username']) && !$es_anonimo) {
+            echo '<a href="editarperfil.php">Editar perfil</a>';
+        }
+        ?>
+            <a href="logout.php">Cerrar sesión</a>
+        </div>
+    </div>
 </div>
+
 
 <div id="preguntas">
     <h2>Mis Preguntas</h2>

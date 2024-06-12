@@ -497,8 +497,3 @@ li:hover {
 .package.apoyo {
   background-color: #c01fb3;
 }
-
-.menu-toggle {
-  display: none;
-  /* Oculta el botón "Menú" por defecto */
-}

@@ -1,10 +1,8 @@
 <?php
-// Inicia sesión
 session_start();
 
 // Verifica si ya hay una sesión iniciada
 if (isset($_SESSION['username'])) {
-    // Si ya hay una sesión iniciada, redirige a blog.php directamente
     header("Location: blog.php");
     exit();
 }
@@ -15,9 +13,9 @@ $error_message = "";
 // Verificar si se envió el formulario de inicio de sesión estándar
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $servername = "localhost";
-    $username_db = "root"; // Usuario por defecto en XAMPP
-    $password_db = ""; // Contraseña por defecto en XAMPP
-    $dbname = "saludmental"; // Nombre de la base de datos que has creado en PHPMyAdmin
+    $username_db = "root";
+    $password_db = "";
+    $dbname = "saludmental";
 
     // Establecer la conexión
     $conn = new mysqli($servername, $username_db, $password_db, $dbname);
@@ -36,28 +34,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Inicio de sesión exitoso
         $row = $result->fetch_assoc();
         $_SESSION['username'] = $row['username'];
-        $_SESSION['nombre'] = $row['nombre']; // Guarda el nombre del usuario en la sesión
-        $_SESSION['apellidos'] = $row['apellidos']; // Guarda los apellidos del usuario en la sesión
-        header("Location: blog.php"); // Redirige a tu página principal o panel de control
+        $_SESSION['nombre'] = $row['nombre'];
+        $_SESSION['apellidos'] = $row['apellidos'];
+        header("Location: blog.php");
         exit();
     } else {
-        // Login fallido
         $error_message = "Usuario o contraseña incorrectos.";
     }
 
     $conn->close();
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['anonymous'])) {
-    // Iniciar sesión anónima
-    $_SESSION['username'] = 'Anónimo';
-    $_SESSION['nombre'] = ''; // Puedes definir un nombre anónimo si lo deseas
-    $_SESSION['apellidos'] = ''; // Puedes definir apellidos anónimos si lo deseas
-    header("Location: blog.php"); // Redirige a tu página principal o panel de control
+    $servername = "localhost";
+    $username_db = "root";
+    $password_db = "";
+    $dbname = "saludmental";
+
+    $conn = new mysqli($servername, $username_db, $password_db, $dbname);
+
+    if ($conn->connect_error) {
+        die("Conexión fallida: " . $conn->connect_error);
+    }
+
+    // Verifica si ya hay un identificador de usuario anónimo en la sesión
+    if (isset($_SESSION['anonimo_id'])) {
+        $anonimo_id = $_SESSION['anonimo_id'];
+    } else {
+        // Obtener el número de anónimos actuales
+        $sql = "SELECT COUNT(*) AS anonimo_count FROM usuarios WHERE username LIKE 'anonimo#%'";
+        $result = $conn->query($sql);
+        $row = $result->fetch_assoc();
+        $anonimo_count = $row['anonimo_count'] + 1;
+
+        // Crear el nombre de usuario para el anónimo actual
+        $anonimo_id = $anonimo_count;
+        $username_anonymous = sprintf("anonimo#%04d", $anonimo_id);
+
+        // Insertar el usuario anónimo en la base de datos si no existe
+        $sql = "INSERT INTO usuarios (username, nombre, apellidos) VALUES (?, 'Anónimo', '')";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $username_anonymous);
+        $stmt->execute();
+        $stmt->close();
+
+        // Guarda el identificador de usuario anónimo en la sesión
+        $_SESSION['anonimo_id'] = $anonimo_id;
+    }
+
+    // Guarda el nombre de usuario anónimo en la sesión
+    $_SESSION['username'] = 'anonimo#' . str_pad($_SESSION['anonimo_id'], 4, '0', STR_PAD_LEFT);
+    $_SESSION['nombre'] = 'Anónimo';
+    $_SESSION['apellidos'] = '';
+
+    $conn->close();
+    header("Location: blog.php");
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -74,12 +109,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 <body>
   <div id="encabezado">
     <h1>Blog • Iniciar sesión</h1>
-		<a href="https://www.cdmadero.tecnm.mx">
-			<img src="../img/logo-itcm.png" alt="Logo ITCM" class="logo-img">
-		</a>
-		<a href="https://www.tecnm.mx">
-			<img src="../img/pleca_tecnm.jpg" alt="Logo TECNM" class="logo-img-tecnm">
-		</a>
+    <a href="https://www.cdmadero.tecnm.mx">
+      <img src="../img/logo-itcm.png" alt="Logo ITCM" class="logo-img">
+    </a>
+    <a href="https://www.tecnm.mx">
+      <img src="../img/pleca_tecnm.jpg" alt="Logo TECNM" class="logo-img-tecnm">
+    </a>
   </div>
 
   <div class="navbar">

@@ -58,20 +58,20 @@
     background-color: #144573;
 }
 
-/* Estilos para las respuestas */
-.respuestas {
+.respuesta {
     margin-top: 10px;
     padding: 10px;
     background-color: #f1f1f1;
     border-radius: 5px;
 }
 
-.respuestas p {
+.respuesta p {
     margin: 5px 0;
 }
 
 /* Estilos para el formulario general */
 form {
+    margin-top: 10px; /* Espacio encima del formulario de respuesta */
     display: flex;
     flex-direction: column;
 }

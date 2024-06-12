@@ -13,6 +13,10 @@ body {
   font-size: 240px;
 }
 
+.encabezado h1{
+  font-size: 20px;
+}
+
 .logo-img {
   position: absolute;
   top: 0;
@@ -127,4 +131,10 @@ footer {
   filter: brightness(0.8);
   /* Aplica un filtro de brillo al pasar el ratón */
   transition: 0.4s;
+}
+
+@media screen and (min-width: 769px) {
+  .dropdown {
+      display: none; /* Ocultar dropdown en PC */
+  }
 }
