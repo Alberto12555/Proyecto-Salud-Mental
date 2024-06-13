@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Establecer la zona horaria
+date_default_timezone_set('America/Mexico_City'); // Reemplaza con tu zona horaria local
+
 if (isset($_SESSION['username'])) {
     $servername = "localhost";
     $username_db = "root";
@@ -27,9 +30,10 @@ if (isset($_SESSION['username'])) {
 
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nueva_pregunta'])) {
             $nueva_pregunta = $conn->real_escape_string($_POST['nueva_pregunta']);
-            $sql_update = "UPDATE preguntas SET pregunta=? WHERE id=? AND usuario=?";
+            $fecha_edicion = date("Y-m-d H:i:s"); // Obtener la fecha y hora actual en la zona horaria configurada
+            $sql_update = "UPDATE preguntas SET pregunta=?, fecha_edicion=?, editado=TRUE WHERE id=? AND usuario=?";
             $stmt_update = $conn->prepare($sql_update);
-            $stmt_update->bind_param("sis", $nueva_pregunta, $id_pregunta, $username);
+            $stmt_update->bind_param("ssis", $nueva_pregunta, $fecha_edicion, $id_pregunta, $username);
 
             if ($stmt_update->execute()) {
                 header("Location: blog.php");
@@ -66,13 +70,20 @@ if (isset($_SESSION['username'])) {
 </head>
 <body>
   <div id="encabezado">
-    <h1>Editar Pregunta</h1>
+    <h1>Salud mental en un ambiente universitario • Blog</h1>
+    <a href="https://www.cdmadero.tecnm.mx">
+      <img src="../img/logo-itcm.png" alt="Logo ITCM" class="logo-img">
+    </a>
+    <a href="https://www.tecnm.mx">
+      <img src="../img/pleca_tecnm.jpg" alt="Logo TECNM" class="logo-img-tecnm">
+    </a>
   </div>
   <div class="navbar">
-    <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a> 
+  <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a> 
+    <a href="logout.php">Cerrar sesión</a>
   </div>
 
-  <div id="formulario">
+  <div id="preguntas">
     <form action="editar_pregunta.php" method="post">
       <input type="hidden" name="id_pregunta" value="<?php echo $id_pregunta; ?>">
       <label for="nueva_pregunta">Editar Pregunta:</label><br>

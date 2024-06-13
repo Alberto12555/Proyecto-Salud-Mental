@@ -13,18 +13,17 @@ if (isset($_SESSION['username'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Consulta SQL para obtener todas las preguntas y sus datos relacionados, ordenadas por fecha de pregunta (más recientes primero)
-    $sql = "SELECT p.id, p.pregunta, p.fecha_pregunta, u.nombre, u.apellidos, u.foto, p.usuario
+    $sql = "SELECT p.id, p.pregunta, p.fecha_pregunta, p.fecha_edicion, p.editado, u.nombre, u.apellidos, u.foto, p.usuario
             FROM preguntas p
             JOIN usuarios u ON p.usuario = u.username
             ORDER BY p.fecha_pregunta DESC";
 
     $result = $conn->query($sql);
 
-    // Consulta SQL para obtener todas las respuestas junto con la información del usuario que respondió
-    $sql_respuestas = "SELECT r.id_pregunta, r.respuesta, r.fecha_respuesta, u.nombre, u.apellidos, u.foto 
+    $sql_respuestas = "SELECT r.id_pregunta, r.respuesta, r.fecha_respuesta, u.nombre, u.apellidos, u.foto, r.usuario
                        FROM respuestas r
-                       JOIN usuarios u ON r.usuario = u.username";
+                       JOIN usuarios u ON r.usuario = u.username
+                       ORDER BY r.fecha_respuesta ASC";
     $result_respuestas = $conn->query($sql_respuestas);
 
     $respuestas = [];
@@ -32,13 +31,9 @@ if (isset($_SESSION['username'])) {
         $respuestas[$row_respuesta['id_pregunta']][] = $row_respuesta;
     }
 
-    // Variables de sesión para mostrar información del usuario
     $nombre = isset($_SESSION['nombre']) ? $_SESSION['nombre'] : '';
     $apellidos = isset($_SESSION['apellidos']) ? $_SESSION['apellidos'] : '';
     $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
-
-    // Verificar si es un usuario anónimo
-    $es_anonimo = strpos($username, 'anonimo#') !== false;
 
     $conn->close();
 } else {
@@ -58,7 +53,6 @@ if (isset($_SESSION['username'])) {
     <link rel="stylesheet" href="../css/blog.css">
     <link rel="stylesheet" href="../css/styles_mobile.css">
     <script src="../js/mostrarmenu.js"></script>
-
 </head>
 <body>
 <div id="encabezado">
@@ -71,22 +65,19 @@ if (isset($_SESSION['username'])) {
     </a>
 </div>
 <div class="navbar">
-    <!-- Menú principal visible en dispositivos de escritorio -->
     <div class="menu-items">
         <a href="../index.html"><img src="../img/home white.png" alt="Inicio" width="38px"></a>
         <a href="preguntar.php">Realizar pregunta</a>
         <a href="mis_preguntas.php">Mis preguntas</a>
         <a href="buscar_usuario.php">Buscar usuario</a>
         <?php
-        // Mostrar editar perfil solo si no es un usuario anónimo
-        if (isset($_SESSION['username']) && !$es_anonimo) {
+        if (isset($_SESSION['username']) && strpos($username, 'anonimo#') === false) {
             echo '<a href="editarperfil.php">Editar perfil</a>';
         }
         ?>
         <a href="logout.php">Cerrar sesión</a>
     </div>
 
-    <!-- Menú desplegable para dispositivos móviles -->
     <div class="dropdown">
         <a href="../index.html"><img src="../img/home white.png" alt="Inicio" width="38px"></a>
         <button onclick="toggleDropdown()">Opciones</button>
@@ -95,8 +86,7 @@ if (isset($_SESSION['username'])) {
             <a href="mis_preguntas.php">Mis preguntas</a>
             <a href="buscar_usuario.php">Buscar usuario</a>
             <?php
-            // Mostrar editar perfil solo si no es un usuario anónimo
-            if (isset($_SESSION['username']) && !$es_anonimo) {
+            if (isset($_SESSION['username']) && strpos($username, 'anonimo#') === false) {
                 echo '<a href="editarperfil.php">Editar perfil</a>';
             }
             ?>
@@ -105,7 +95,17 @@ if (isset($_SESSION['username'])) {
     </div>
 </div>
 
-<center><h4>Bienvenido, <?php echo htmlspecialchars($nombre) . ' ' . htmlspecialchars($apellidos); ?> &#128578;</h4></center>
+<center><h4>Bienvenido, 
+<?php
+if (isset($_SESSION['username'])) {
+    if (strpos($_SESSION['username'], 'anonimo#') !== false) {
+        echo htmlspecialchars($_SESSION['username']);
+    } else {
+        echo htmlspecialchars($nombre . ' ' . $apellidos);
+    }
+}
+?> &#128578;</h4></center>
+
 
 <div id="preguntas">
     <h2>Preguntas</h2>
@@ -113,11 +113,20 @@ if (isset($_SESSION['username'])) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
             echo "<div class='pregunta'>";
+            echo "<a href='pregunta_detalle.php?id=" . htmlspecialchars($row['id']) . "' class='pregunta-link'>";
             echo "<div class='user-info'>";
             echo "<img src='" . (empty($row['foto']) ? '../img/nophoto.png' : htmlspecialchars($row['foto'])) . "' alt='Foto de perfil' class='user-foto'>";
             echo "<div class='user-details'>";
-            echo "<p>" . htmlspecialchars($row['nombre']) . ' ' . htmlspecialchars($row['apellidos']) . "</p>";
-            echo "<p>" . htmlspecialchars($row['fecha_pregunta']) . "</p>";
+            if (strpos($row['usuario'], 'anonimo#') !== false) {
+                echo "<p>" . htmlspecialchars($row['usuario']) . "</p>";
+            } else {
+                echo "<p>" . htmlspecialchars($row['nombre']) . ' ' . htmlspecialchars($row['apellidos']) . "</p>";
+            }
+            echo "<p>" . htmlspecialchars($row['fecha_pregunta']);
+            if ($row['editado']) {
+                echo " • Editado a las " . htmlspecialchars($row['fecha_edicion']);
+            }
+            echo "</p>";
             echo "</div>";
             echo "</div>";
             echo "<h3>" . htmlspecialchars($row['pregunta']) . "</h3>";
@@ -141,7 +150,11 @@ if (isset($_SESSION['username'])) {
                     echo "<div class='user-info'>";
                     echo "<img src='" . (empty($respuesta['foto']) ? '../img/nophoto.png' : htmlspecialchars($respuesta['foto'])) . "' alt='Foto de perfil' class='user-foto'>";
                     echo "<div class='user-details'>";
-                    echo "<p>" . htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellidos']) . "</p>";
+                    if (strpos($respuesta['usuario'], 'anonimo#') !== false) {
+                        echo "<p>" . htmlspecialchars($respuesta['usuario']) . "</p>";
+                    } else {
+                        echo "<p>" . htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellidos']) . "</p>";
+                    }
                     echo "<p>" . htmlspecialchars($respuesta['fecha_respuesta']) . "</p>";
                     echo "</div>";
                     echo "</div>";
@@ -149,12 +162,12 @@ if (isset($_SESSION['username'])) {
                     echo "</div>";
                 }
             }
+            echo "</a>";
             echo "<form action='procesar_respuesta.php' method='post'>";
             echo "<input type='hidden' name='id_pregunta' value='" . htmlspecialchars($row['id']) . "'>";
-            echo "<textarea name='respuesta' rows='2' cols='50' placeholder='Escribe tu respuesta aquí' required></textarea>";
+            echo "<textarea name='respuesta' required></textarea>";
             echo "<button type='submit'>Responder</button>";
             echo "</form>";
-
             echo "</div>";
         }
     } else {
@@ -166,6 +179,5 @@ if (isset($_SESSION['username'])) {
 <footer>
     <p>&copy; Copyright <?php echo date('Y'); ?> TecNM/CdMadero - Todos los Derechos Reservados</p>
 </footer>
-
 </body>
 </html>

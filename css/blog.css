@@ -23,7 +23,7 @@
 
 .pregunta h3 {
     margin: 0 0 10px;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: normal;
 }
 
@@ -243,3 +243,10 @@ textarea {
     color: #666;
     font-size: 14px; /* Reducimos el tamaño de fuente */
 }
+
+.pregunta-link {
+    display: block; /* Para que el enlace ocupe todo el espacio disponible */
+    text-decoration: none; /* Eliminar el subrayado predeterminado */
+    color: #333; /* Color del texto para enlaces no visitados */
+}
+

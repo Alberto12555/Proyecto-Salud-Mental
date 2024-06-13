@@ -60,14 +60,14 @@ if (isset($_SESSION['username'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="stylesheet" href="../css/blog.css">
-  <link rel="stylesheet" href="../css/styles_mobile.css">
+  <link rel="stylesheet" href="css/styles_mobile.css">
   <title>Blog</title>
   <link rel="icon" href="../img/logo-itcm-icono.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
 </head>
 <body>
   <div id="encabezado">
-    <h1>Salud mental en un ambiente universitario • Blog ITCM</h1>
+    <h1>Salud mental en un ambiente universitario • Blog</h1>
     <a href="https://www.cdmadero.tecnm.mx">
       <img src="../img/logo-itcm.png" alt="Logo ITCM" class="logo-img">
     </a>
@@ -76,7 +76,7 @@ if (isset($_SESSION['username'])) {
     </a>
   </div>
   <div class="navbar">
-    <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a> 
+  <a href="./blog.php"><img src="../img/return.png" alt="Inicio" width="38px"></a> 
     <a href="logout.php">Cerrar sesión</a>
   </div> 
 

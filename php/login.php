@@ -57,9 +57,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    // Verifica si ya hay un identificador de usuario anónimo en la sesión
-    if (isset($_SESSION['anonimo_id'])) {
-        $anonimo_id = $_SESSION['anonimo_id'];
+    // Verifica si ya hay un identificador de usuario anónimo en la cookie
+    if (isset($_COOKIE['anon_id'])) {
+        $username_anonymous = $_COOKIE['anon_id'];
     } else {
         // Obtener el número de anónimos actuales
         $sql = "SELECT COUNT(*) AS anonimo_count FROM usuarios WHERE username LIKE 'anonimo#%'";
@@ -68,8 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
         $anonimo_count = $row['anonimo_count'] + 1;
 
         // Crear el nombre de usuario para el anónimo actual
-        $anonimo_id = $anonimo_count;
-        $username_anonymous = sprintf("anonimo#%04d", $anonimo_id);
+        $username_anonymous = sprintf("anonimo#%04d", $anonimo_count);
 
         // Insertar el usuario anónimo en la base de datos si no existe
         $sql = "INSERT INTO usuarios (username, nombre, apellidos) VALUES (?, 'Anónimo', '')";
@@ -78,20 +77,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
         $stmt->execute();
         $stmt->close();
 
-        // Guarda el identificador de usuario anónimo en la sesión
-        $_SESSION['anonimo_id'] = $anonimo_id;
-    }
-
-    // Guarda el nombre de usuario anónimo en la sesión
-    $_SESSION['username'] = 'anonimo#' . str_pad($_SESSION['anonimo_id'], 4, '0', STR_PAD_LEFT);
-    $_SESSION['nombre'] = 'Anónimo';
-    $_SESSION['apellidos'] = '';
-
-    $conn->close();
-    header("Location: blog.php");
-    exit();
-}
-?>
+        // Guarda el identificador de usuario anónimo en la cookie
+        setcookie('anon_id', $username_anonymous, time() + (7 * 365 * 24 * 60 * 60), "/");
+      }
+  
+      // Guarda el nombre de usuario anónimo en la sesión
+      $_SESSION['username'] = $username_anonymous;
+      $_SESSION['nombre'] = 'Anónimo';
+      $_SESSION['apellidos'] = '';
+  
+      $conn->close();
+      header("Location: blog.php");
+      exit();
+  }
+  ?>
 
 <!DOCTYPE html>
 <html lang="es">

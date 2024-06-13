@@ -20,7 +20,7 @@ if ($conn->connect_error) {
 $username = $_SESSION['username'];
 
 // Consulta para obtener todas las preguntas realizadas por el usuario actual
-$sql = "SELECT p.id, p.pregunta, p.fecha_pregunta, u.nombre, u.apellidos, u.foto
+$sql = "SELECT p.id, p.pregunta, p.fecha_pregunta, p.fecha_edicion, p.editado, u.nombre, u.apellidos, u.foto
         FROM preguntas p
         JOIN usuarios u ON p.usuario = u.username
         WHERE p.usuario = '$username'
@@ -29,7 +29,7 @@ $sql = "SELECT p.id, p.pregunta, p.fecha_pregunta, u.nombre, u.apellidos, u.foto
 $result = $conn->query($sql);
 
 // Consulta para obtener las respuestas asociadas a cada pregunta
-$sql_respuestas = "SELECT r.id, r.id_pregunta, r.respuesta, r.fecha_respuesta, u.nombre, u.apellidos, u.foto
+$sql_respuestas = "SELECT r.id, r.id_pregunta, r.respuesta, r.fecha_respuesta, u.username as usuario, u.nombre, u.apellidos, u.foto
                   FROM respuestas r
                   JOIN usuarios u ON r.usuario = u.username
                   WHERE r.id_pregunta IN (SELECT id FROM preguntas WHERE usuario = '$username')
@@ -94,16 +94,15 @@ $conn->close();
         <div id="myDropdown" class="dropdown-content">
             <a href="preguntar.php">Realizar pregunta</a>
             <?php
-        // Mostrar editar perfil solo si no es un usuario anónimo
-        if (isset($_SESSION['username']) && !$es_anonimo) {
-            echo '<a href="editarperfil.php">Editar perfil</a>';
-        }
-        ?>
+            // Mostrar editar perfil solo si no es un usuario anónimo
+            if (isset($_SESSION['username']) && !$es_anonimo) {
+                echo '<a href="editarperfil.php">Editar perfil</a>';
+            }
+            ?>
             <a href="logout.php">Cerrar sesión</a>
         </div>
     </div>
 </div>
-
 
 <div id="preguntas">
     <h2>Mis Preguntas</h2>
@@ -112,10 +111,22 @@ $conn->close();
         while($row = $result->fetch_assoc()) {
             echo "<div class='pregunta'>";
             echo "<div class='user-info'>";
-            echo "<img src='" . $row['foto'] . "' alt='Foto de perfil' class='user-foto'>";
+            if (!empty($row['foto'])) {
+                echo "<img src='" . htmlspecialchars($row['foto']) . "' alt='Foto de perfil' class='user-foto'>";
+            } else {
+                echo "<img src='../img/nophoto.png' alt='Foto de perfil' class='user-foto'>";
+            }
             echo "<div class='user-details'>";
-            echo "<p>" . htmlspecialchars($row['nombre']) . ' ' . htmlspecialchars($row['apellidos']) . "</p>";
-            echo "<p>" . htmlspecialchars($row['fecha_pregunta']) . "</p>";
+            if ($es_anonimo) {
+                echo "<p>" . htmlspecialchars($username) . "</p>";
+            } else {
+                echo "<p>" . htmlspecialchars($row['nombre']) . ' ' . htmlspecialchars($row['apellidos']) . "</p>";
+            }
+            echo "<p>" . htmlspecialchars($row['fecha_pregunta']);
+            if ($row['editado']) {
+                echo " • Editado a las " . htmlspecialchars($row['fecha_edicion']);
+            }
+            echo "</p>";
             echo "</div>"; // Cierre de div.user-details
             echo "</div>"; // Cierre de div.user-info
             echo "<h3>" . htmlspecialchars($row['pregunta']) . "</h3>";
@@ -132,26 +143,38 @@ $conn->close();
             echo "</form>";
             echo "</div>"; // Cierre de div.botones-pregunta
 
-            // Mostrar respuestas si existen
-            if (isset($respuestas_por_pregunta[$row['id']])) {
-                echo "<div class='respuestas'>";
-                foreach ($respuestas_por_pregunta[$row['id']] as $respuesta) {
-                    echo "<div class='respuesta'>";
-                    echo "<div class='user-info'>";
-                    echo "<img src='" . $respuesta['foto'] . "' alt='Foto de perfil' class='user-foto'>";
-                    echo "<div class='user-details'>";
-                    echo "<p>" . htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellidos']) . "</p>";
-                    echo "<p>" . htmlspecialchars($respuesta['fecha_respuesta']) . "</p>";
-                    echo "</div>"; // Cierre de div.user-details
-                    echo "</div>"; // Cierre de div.user-info
-                    echo "<p>" . htmlspecialchars($respuesta['respuesta']) . "</p>";
-                    echo "</div>"; // Cierre de div.respuesta
-                }
-                echo "</div>"; // Cierre de div.respuestas
-            }
+// Mostrar respuestas si existen
+if (isset($respuestas_por_pregunta[$row['id']])) {
 
-            echo "</div>"; // Cierre de div.pregunta
+    foreach ($respuestas_por_pregunta[$row['id']] as $respuesta) {
+        echo "<div class='respuesta'>";
+        echo "<div class='user-info'>";
+        if (!empty($respuesta['foto'])) {
+            echo "<img src='" . htmlspecialchars($respuesta['foto']) . "' alt='Foto de perfil' class='user-foto'>";
+        } else {
+            echo "<img src='../img/nophoto.png' alt='Foto de perfil' class='user-foto'>";
         }
+        echo "<div class='user-details'>";
+        if (strpos($respuesta['usuario'], 'anonimo#') !== false) {
+            echo "<p>" . htmlspecialchars($respuesta['usuario']) . "</p>";
+        } else {
+            echo "<p>" . htmlspecialchars($respuesta['nombre']) . ' ' . htmlspecialchars($respuesta['apellidos']) . "</p>";
+        }
+        echo "<p>" . htmlspecialchars($respuesta['fecha_respuesta']) . "</p>";
+        echo "</div>"; // Cierre de div.user-details
+        echo "</div>"; // Cierre de div.user-info
+        echo "<p>" . htmlspecialchars($respuesta['respuesta']) . "</p>";
+        echo "</div>"; // Cierre de div.respuesta
+    }
+}
+echo "<form action='procesar_respuesta.php' method='post'>";
+            echo "<input type='hidden' name='id_pregunta' value='" . htmlspecialchars($row['id']) . "'>";
+            echo "<textarea name='respuesta' required></textarea>";
+            echo "<button type='submit'>Responder</button>";
+            echo "</form>";
+            
+echo "</div>"; // Cierre de div.pregunta
+}
     } else {
         echo "<p>No has realizado preguntas aún.</p>";
     }

@@ -31,8 +31,11 @@ if (isset($_SESSION['username'])) {
     $sql = "INSERT INTO respuestas (id_pregunta, respuesta, usuario, fecha_respuesta) VALUES ('$id_pregunta', '$respuesta', '$usuario', '$fecha_respuesta')";
 
     if ($conn->query($sql) === TRUE) {
-        // Redirigir a blog.php después de guardar la respuesta
-        header("Location: blog.php");
+        // Obtener el ID de la respuesta insertada
+        $id_respuesta = $conn->insert_id;
+
+        // Redirigir a pregunta_detalle.php después de guardar la respuesta
+        header("Location: pregunta_detalle.php?id=$id_pregunta#$id_respuesta");
         exit();
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
