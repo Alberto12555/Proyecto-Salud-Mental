@@ -32,22 +32,20 @@
 			<a href="#saber-mas">Saber más</a>
 			<a href="php/blog.php">Blog</a>
 		</div>
-	
-	
-	<!-- Aquí se conserva el menú desplegable para dispositivos móviles -->
-	<div class="dropdown">
-		<a href="index.html"><img src="img/home white.png" alt="Inicio" width="38px"></a>
-		<button onclick="toggleDropdown()">Opciones</button>
-		<div id="myDropdown" class="dropdown-content">
-			<a href="#info">Bienestar integral</a>
-			<a href="#especialidades">Salud mental universitaria</a>
-			<a href="#saber-mas">Saber más</a>
-			<a href="php/blog.php">Blog</a>
+
+		<!-- Aquí se conserva el menú desplegable para dispositivos móviles -->
+		<div class="dropdown">
+			<a href="index.html"><img src="img/home white.png" alt="Inicio" width="38px"></a>
+			<button onclick="toggleDropdown()">Opciones</button>
+			<div id="myDropdown" class="dropdown-content">
+				<a href="#info">Bienestar integral</a>
+				<a href="#especialidades">Salud mental universitaria</a>
+				<a href="#saber-mas">Saber más</a>
+				<a href="php/blog.php">Blog</a>
+			</div>
 		</div>
 	</div>
-</div>
-	
-	
+
 	<div class="portada-container">
 		<img src="img/banner1.jpg" alt="Portada-Overlay" class="portada-imagen">
 	</div>
@@ -72,7 +70,7 @@
 				bienestar es nuestra prioridad, y avanzamos hacia un entorno universitario donde la tecnología
 				contribuye activamente al cuidado integral de la salud mental.</p>
 
-			<!-- carrusel -->
+			<!-- Carrusel -->
 
 			<div class="slideshow-container">
 				<div class="mySlides fade">
@@ -344,9 +342,7 @@
 			</ul>
 		</section>
 
-
-
-		<!-- Buenos habitos -->
+		<!-- Buenos hábitos -->
 		<section id="habitos">
 			<center>
 				<h2 class="titulo-seccion"> Buenos Hábitos</h2>
@@ -361,7 +357,6 @@
 							magras puede contribuir al bienestar mental.</p>
 					</div>
 				</div>
-
 
 				<div class="package descansar">
 					<div class="buenos-habitos">
@@ -458,13 +453,11 @@
 					<p id="modal-text"></p>
 				</div>
 			</div>
-
 			<script src="js/ventana_modal.js"></script>
-
 		</section>
 
 
-		<section id="saber-mas"> <!-- Sección de Conozca su salud -->
+		<section id="saber-mas"> <!-- Sección de conozca su salud -->
 			<h2>¡Encuentra Apoyo Psicológico!</h2>
 			<p>En esta sección, hemos recopilado una lista de enlaces a recursos gubernamentales que ofrecen ayuda
 				psicológica gratuita y confiable. Sabemos lo importante que es cuidar nuestra salud mental,
@@ -505,25 +498,15 @@
 	<script src="js/botonocultar.js"></script>
 	<script src="js/botonesmostrar.js"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-	function toggleDropdown() {
-		var dropdown = document.getElementById("myDropdown");
-		if (dropdown.style.display === "block") {
-			dropdown.style.display = "none";
-		} else {
-			dropdown.style.display = "block";
-		}
-	}
-	</script>
 
-	<footer> <!-- Pie de página -->
+	<footer>
 		<h2 id="horarios-ubicaciones">Dirección y Contacto</h2>
 		<h5>Av. 1o. de Mayo esq. Sor Juana Inés de la Cruz s/n Col. Los Mangos C.P.89440
 			<br>Email: informacion@cdmadero.tecnm.mx <br>Conmutador: Tel. (833) 357 48 20
 			<br>&copy; Copyright 2023 TecNM/CdMadero - Todos los Derechos Reservados
 		</h5>
 	</footer>
-</body>
 
+</body>
 
 </html>

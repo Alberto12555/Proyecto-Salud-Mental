@@ -13,7 +13,7 @@ body {
   font-size: 240px;
 }
 
-.encabezado h1{
+.encabezado h1 {
   font-size: 20px;
 }
 
@@ -72,69 +72,54 @@ ul {
   margin-left: 20px;
 }
 
-/* Estilos para el pie de página */
-
 footer {
   background-color: #1B396A;
   color: white;
   text-align: center;
   bottom: 0;
   width: 100%;
-  padding: 10px 0; /* Ajusta el relleno superior e inferior según sea necesario */
+  padding: 10px 0;
   margin: 0;
 }
 
-
-/* Contenedor del menú  incio*/
 .navbar {
   background-color: #1B396A;
   top: 10px;
-  /* Ajusta este valor según la altura de tu encabezado */
   height: 40px;
   width: 100%;
   color: white;
   text-align: center;
 }
 
-/* Estilo de los enlaces */
 .navbar a {
   text-align: center;
   color: #fff;
-  /* Color de texto */
   padding: 10px 10px;
-  /* Espaciado interno */
   text-decoration: none;
   font-size: 17px;
   border-radius: 20px;
-  /* Añadir bordes redondeados */
   transition: 0.4s;
-  /* Transición suave */
 }
 
-/* Al pasar el mouse */
 .navbar a:hover {
   color: #6F7271;
 }
 
 .navbar a img {
   vertical-align: middle;
-  /* Alinea verticalmente la imagen */
   max-width: 100px;
-  /* Establece el ancho máximo de la imagen */
   height: auto;
-  /* Hacer la imagen sensible al tamaño */
   margin-right: 5px;
-  /* Ajusta el margen derecho para separar la imagen del texto */
 }
 
 .navbar a img:hover {
   filter: brightness(0.8);
-  /* Aplica un filtro de brillo al pasar el ratón */
   transition: 0.4s;
 }
 
 @media screen and (min-width: 769px) {
   .dropdown {
-      display: none; /* Ocultar dropdown en PC */
+    display: none;
+    /* Ocultar dropdown en PC */
   }
 }

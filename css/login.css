@@ -1,4 +1,3 @@
-/* Estilos específicos para el formulario de login */
 form {
   margin-top: 50px;
   max-width: 400px;
@@ -20,7 +19,6 @@ input {
   margin-bottom: 16px;
   box-sizing: border-box;
   text-align: center;
-  /* Alinea el texto al centro */
 }
 
 button {
@@ -40,7 +38,6 @@ button:hover {
   text-align: center;
 }
 
-/* Estilos para el mensaje debajo del formulario */
 .mensaje-registro {
   margin-top: 20px;
   text-align: center;

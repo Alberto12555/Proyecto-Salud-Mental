@@ -1,5 +1,46 @@
+<?php
+// Procesar los datos del formulario cuando se envíe
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Conexión a la base de datos utilizando PHPMyAdmin y XAMPP
+    $servername = "localhost";
+    $username_db = "root"; // Usuario por defecto en XAMPP
+    $password_db = ""; // Contraseña por defecto en XAMPP
+    $dbname = "saludmental"; // Nombre de la base de datos que has creado en PHPMyAdmin
+
+    // Crear la conexión
+    $conn = new mysqli($servername, $username_db, $password_db, $dbname);
+
+    // Verificar la conexión
+    if ($conn->connect_error) {
+        die("Error de conexión: " . $conn->connect_error);
+    }
+
+    // Obtener los datos del formulario
+    $nombre = $_POST["nombre"];
+    $apellidos = $_POST["apellidos"];
+    $correo_electronico = $_POST["correo_electronico"];
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    // Insertar datos en la tabla usuarios
+    $sql = "INSERT INTO usuarios (nombre, apellidos, correo_electronico, username, password) 
+            VALUES ('$nombre', '$apellidos', '$correo_electronico', '$username', '$password')";
+
+    if ($conn->query($sql) === TRUE) {
+        // Mostrar alert de registro exitoso
+        echo '<script>alert("Registro exitoso. Favor de iniciar sesión."); window.location.href = "login.php";</script>';
+    } else {
+        echo "Error al registrar: " . $conn->error;
+    }
+
+    // Cerrar la conexión
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +50,13 @@
     <title>Registro</title>
     <link rel="icon" href="../img/logo-itcm-icono.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <!-- Script para mostrar alert después del registro -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        });
+    </script>
 </head>
+
 <body>
     <div id="encabezado">
         <h1>Blog • Registro</h1>
@@ -22,8 +69,8 @@
     </div>
 
     <div class="navbar">
-        <a href="../index.html"><img src="../img/home white.png" alt="Inicio" width="38px"></a> 
-    </div> 
+        <a href="../index.html"><img src="../img/home white.png" alt="Inicio" width="38px"></a>
+    </div>
 
     <form method="post" class="formulario-login">
         <label for="nombre">Nombre(s):</label>
@@ -48,45 +95,6 @@
         <p>¿Ya tienes una cuenta? <a href="login.php">Ingresa ahora</a>.</p>
     </div>
 
-    <?php
-    // Procesar los datos del formulario cuando se envíe
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Conexión a la base de datos utilizando PHPMyAdmin y XAMPP
-        $servername = "localhost";
-        $username_db = "root"; // Usuario por defecto en XAMPP
-        $password_db = ""; // Contraseña por defecto en XAMPP
-        $dbname = "saludmental"; // Nombre de la base de datos que has creado en PHPMyAdmin
-
-        // Crear la conexión
-        $conn = new mysqli($servername, $username_db, $password_db, $dbname);
-
-        // Verificar la conexión
-        if ($conn->connect_error) {
-            die("Error de conexión: " . $conn->connect_error);
-        }
-
-        // Obtener los datos del formulario
-        $nombre = $_POST["nombre"];
-        $apellidos = $_POST["apellidos"];
-        $correo_electronico = $_POST["correo_electronico"];
-        $username = $_POST["username"];
-        $password = $_POST["password"];
-
-        // Insertar datos en la tabla usuarios
-        $sql = "INSERT INTO usuarios (nombre, apellidos, correo_electronico, username, password) 
-                VALUES ('$nombre', '$apellidos', '$correo_electronico', '$username', '$password')";
-
-        if ($conn->query($sql) === TRUE) {
-            // Redirigir después de un registro exitoso
-            header("Location: login.php");
-            exit();
-        } else {
-            echo "Error al registrar: " . $conn->error;
-        }
-
-        // Cerrar la conexión
-        $conn->close();
-    }
-    ?>
 </body>
+
 </html>

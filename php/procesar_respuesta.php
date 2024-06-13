@@ -18,7 +18,6 @@ if (isset($_SESSION['username'])) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    // Configurar la zona horaria
     date_default_timezone_set('America/Mexico_City');
 
     // Obtener la respuesta y el ID de la pregunta del formulario
@@ -47,4 +46,3 @@ if (isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
 }
-?>

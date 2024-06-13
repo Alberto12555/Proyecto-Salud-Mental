@@ -3,8 +3,8 @@ session_start();
 
 // Verifica si ya hay una sesión iniciada
 if (isset($_SESSION['username'])) {
-    header("Location: blog.php");
-    exit();
+  header("Location: blog.php");
+  exit();
 }
 
 // Variable para almacenar el mensaje de error
@@ -12,88 +12,89 @@ $error_message = "";
 
 // Verificar si se envió el formulario de inicio de sesión estándar
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
-    $servername = "localhost";
-    $username_db = "root";
-    $password_db = "";
-    $dbname = "saludmental";
+  $servername = "localhost";
+  $username_db = "root";
+  $password_db = "";
+  $dbname = "saludmental";
 
-    // Establecer la conexión
-    $conn = new mysqli($servername, $username_db, $password_db, $dbname);
+  // Establecer la conexión
+  $conn = new mysqli($servername, $username_db, $password_db, $dbname);
 
-    // Verificar la conexión
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
-
-    // Obtener los datos del formulario de login estándar
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Consulta SQL para verificar las credenciales del usuario
-    $sql = "SELECT * FROM usuarios WHERE username='$username' AND password='$password'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $_SESSION['username'] = $row['username'];
-        $_SESSION['nombre'] = $row['nombre'];
-        $_SESSION['apellidos'] = $row['apellidos'];
-        header("Location: blog.php");
-        exit();
-    } else {
-        $error_message = "Usuario o contraseña incorrectos.";
-    }
-
-    $conn->close();
-} elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['anonymous'])) {
-    $servername = "localhost";
-    $username_db = "root";
-    $password_db = "";
-    $dbname = "saludmental";
-
-    $conn = new mysqli($servername, $username_db, $password_db, $dbname);
-
-    if ($conn->connect_error) {
-        die("Conexión fallida: " . $conn->connect_error);
-    }
-
-    // Verifica si ya hay un identificador de usuario anónimo en la cookie
-    if (isset($_COOKIE['anon_id'])) {
-        $username_anonymous = $_COOKIE['anon_id'];
-    } else {
-        // Obtener el número de anónimos actuales
-        $sql = "SELECT COUNT(*) AS anonimo_count FROM usuarios WHERE username LIKE 'anonimo#%'";
-        $result = $conn->query($sql);
-        $row = $result->fetch_assoc();
-        $anonimo_count = $row['anonimo_count'] + 1;
-
-        // Crear el nombre de usuario para el anónimo actual
-        $username_anonymous = sprintf("anonimo#%04d", $anonimo_count);
-
-        // Insertar el usuario anónimo en la base de datos si no existe
-        $sql = "INSERT INTO usuarios (username, nombre, apellidos) VALUES (?, 'Anónimo', '')";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $username_anonymous);
-        $stmt->execute();
-        $stmt->close();
-
-        // Guarda el identificador de usuario anónimo en la cookie
-        setcookie('anon_id', $username_anonymous, time() + (7 * 365 * 24 * 60 * 60), "/");
-      }
-  
-      // Guarda el nombre de usuario anónimo en la sesión
-      $_SESSION['username'] = $username_anonymous;
-      $_SESSION['nombre'] = 'Anónimo';
-      $_SESSION['apellidos'] = '';
-  
-      $conn->close();
-      header("Location: blog.php");
-      exit();
+  // Verificar la conexión
+  if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
   }
-  ?>
+
+  // Obtener los datos del formulario de login estándar
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+
+  // Consulta SQL para verificar las credenciales del usuario
+  $sql = "SELECT * FROM usuarios WHERE username='$username' AND password='$password'";
+  $result = $conn->query($sql);
+
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $_SESSION['username'] = $row['username'];
+    $_SESSION['nombre'] = $row['nombre'];
+    $_SESSION['apellidos'] = $row['apellidos'];
+    header("Location: blog.php");
+    exit();
+  } else {
+    $error_message = "Usuario o contraseña incorrectos.";
+  }
+
+  $conn->close();
+} elseif ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['anonymous'])) {
+  $servername = "localhost";
+  $username_db = "root";
+  $password_db = "";
+  $dbname = "saludmental";
+
+  $conn = new mysqli($servername, $username_db, $password_db, $dbname);
+
+  if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
+  }
+
+  // Verifica si ya hay un identificador de usuario anónimo en la cookie
+  if (isset($_COOKIE['anon_id'])) {
+    $username_anonymous = $_COOKIE['anon_id'];
+  } else {
+    // Obtener el número de anónimos actuales
+    $sql = "SELECT COUNT(*) AS anonimo_count FROM usuarios WHERE username LIKE 'anonimo#%'";
+    $result = $conn->query($sql);
+    $row = $result->fetch_assoc();
+    $anonimo_count = $row['anonimo_count'] + 1;
+
+    // Crear el nombre de usuario para el anónimo actual
+    $username_anonymous = sprintf("anonimo#%04d", $anonimo_count);
+
+    // Insertar el usuario anónimo en la base de datos si no existe
+    $sql = "INSERT INTO usuarios (username, nombre, apellidos) VALUES (?, 'Anónimo', '')";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username_anonymous);
+    $stmt->execute();
+    $stmt->close();
+
+    // Guarda el identificador de usuario anónimo en la cookie
+    setcookie('anon_id', $username_anonymous, time() + (7 * 365 * 24 * 60 * 60), "/");
+  }
+
+  // Guarda el nombre de usuario anónimo en la sesión
+  $_SESSION['username'] = $username_anonymous;
+  $_SESSION['nombre'] = 'Anónimo';
+  $_SESSION['apellidos'] = '';
+
+  $conn->close();
+  header("Location: blog.php");
+  exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -117,12 +118,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
   </div>
 
   <div class="navbar">
-    <a href="../index.html"><img src="../img/home white.png" alt="Inicio" width="38px"></a> 
-  </div> 
+    <a href="../index.html"><img src="../img/home white.png" alt="Inicio" width="38px"></a>
+  </div>
 
   <?php
   if (!empty($error_message)) {
-      echo "<div class='mensaje-error'>$error_message</div>";
+    echo "<div class='mensaje-error'>$error_message</div>";
   }
   ?>
   <form method="post" class="formulario-login">
@@ -144,4 +145,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <button type="submit" class="boton" name="anonymous">Iniciar sesión como anónimo</button>
   </form>
 </body>
+
 </html>
