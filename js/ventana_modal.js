@@ -29,7 +29,6 @@ function mostrarModal(imagenSrc, texto) {
     }
 }
 
-
 // Asocia la función mostrarModal a cada enlace, pasando la imagen correspondiente como argumento
 document.getElementById('amistad').addEventListener('click', function (event) {
     event.preventDefault();

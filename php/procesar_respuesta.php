@@ -27,7 +27,8 @@ if (isset($_SESSION['username'])) {
     $fecha_respuesta = date('Y-m-d H:i:s');
 
     // Insertar la respuesta en la base de datos
-    $sql = "INSERT INTO respuestas (id_pregunta, respuesta, usuario, fecha_respuesta) VALUES ('$id_pregunta', '$respuesta', '$usuario', '$fecha_respuesta')";
+    $sql = "INSERT INTO respuestas (id_pregunta, respuesta, usuario, fecha_respuesta) 
+    VALUES ('$id_pregunta', '$respuesta', '$usuario', '$fecha_respuesta')";
 
     if ($conn->query($sql) === TRUE) {
         // Obtener el ID de la respuesta insertada

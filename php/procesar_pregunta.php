@@ -14,10 +14,17 @@ if (isset($_SESSION['username'])) {
     }
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $pregunta = $conn->real_escape_string($_POST['pregunta']);
-        $username = $_SESSION['username'];
+        // Obtener y limpiar el contenido del campo 'pregunta'
+        $pregunta = trim($_POST['pregunta']);
+
+        // Validar que la pregunta no esté vacía antes de continuar
+        if (empty($pregunta)) {
+            echo "Error: La pregunta no puede estar vacía.";
+            exit();
+        }
 
         // Obtener el nombre completo del usuario
+        $username = $_SESSION['username'];
         $sql_user = "SELECT nombre, apellidos FROM usuarios WHERE username=?";
         $stmt_user = $conn->prepare($sql_user);
         $stmt_user->bind_param("s", $username);
@@ -27,6 +34,7 @@ if (isset($_SESSION['username'])) {
         $nombre_completo = $nombre . ' ' . $apellidos;
         $stmt_user->close();
 
+        // Insertar la pregunta en la base de datos
         $sql = "INSERT INTO preguntas (usuario, pregunta, nombre, fecha_pregunta) VALUES (?, ?, ?, NOW())";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("sss", $username, $pregunta, $nombre_completo);

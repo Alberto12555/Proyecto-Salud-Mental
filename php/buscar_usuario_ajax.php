@@ -29,7 +29,7 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         echo "<div class='usuario'>";
-        echo "<img src='" . htmlspecialchars($row['foto']) . "' alt='Foto de perfil' class='user-foto'>";
+        echo "<img src='" . (empty($row['foto']) ? '../img/nophoto.png' : htmlspecialchars($row['foto'])) . "' alt='Foto de perfil' class='user-foto'>";
         echo "<div class='user-details'>";
         echo "<p>" . htmlspecialchars($row['nombre']) . ' ' . htmlspecialchars($row['apellidos']) . "</p>";
         echo "<a href='ver_preguntas.php?usuario=" . urlencode($row['username']) . "'>Ver preguntas de este usuario</a>";

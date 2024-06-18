@@ -126,12 +126,12 @@ $conn->close();
                 }
                 echo "<p>" . htmlspecialchars($row['fecha_pregunta']);
                 if ($row['editado']) {
-                    echo " • Editado a las " . htmlspecialchars($row['fecha_edicion']);
+                    echo " • Editado el " . htmlspecialchars($row['fecha_edicion']);
                 }
                 echo "</p>";
                 echo "</div>"; // Cierre de div.user-details
                 echo "</div>"; // Cierre de div.user-info
-                echo "<h3>" . htmlspecialchars($row['pregunta']) . "</h3>";
+                echo "<h3>" . nl2br(htmlspecialchars($row['pregunta']) . "</h3>");
                 echo "<div class='botones-pregunta'>"; // Contenedor para los botones
                 // Botones de editar y eliminar
                 echo "<form action='editar_pregunta.php' method='post'>";
@@ -165,7 +165,7 @@ $conn->close();
                         echo "<p>" . htmlspecialchars($respuesta['fecha_respuesta']) . "</p>";
                         echo "</div>"; // Cierre de div.user-details
                         echo "</div>"; // Cierre de div.user-info
-                        echo "<p>" . htmlspecialchars($respuesta['respuesta']) . "</p>";
+                        echo "<p>" . nl2br(htmlspecialchars($respuesta['respuesta'])) . "</p>";
                         echo "</div>"; // Cierre de div.respuesta
                     }
                 }

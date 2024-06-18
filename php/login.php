@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     die("Conexión fallida: " . $conn->connect_error);
   }
 
-  // Obtener los datos del formulario de login estándar
+  // Obtener los datos del formulario de login
   $username = $_POST['username'];
   $password = $_POST['password'];
 

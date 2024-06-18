@@ -19,8 +19,22 @@ if ($conn->connect_error) {
 
 $usuario = $_GET['usuario'];
 
+// Consulta para obtener el nombre completo del usuario
+$sql_usuario = "SELECT nombre, apellidos FROM usuarios WHERE username = ?";
+$stmt_usuario = $conn->prepare($sql_usuario);
+$stmt_usuario->bind_param("s", $usuario);
+$stmt_usuario->execute();
+$result_usuario = $stmt_usuario->get_result();
+
+if ($result_usuario->num_rows > 0) {
+    $row_usuario = $result_usuario->fetch_assoc();
+    $nombre_completo = $row_usuario['nombre'] . ' ' . $row_usuario['apellidos'];
+} else {
+    $nombre_completo = "Usuario no encontrado";
+}
+
 // Consulta para obtener las preguntas del usuario específico
-$sql = "SELECT p.id, p.pregunta, p.fecha_pregunta, u.nombre, u.apellidos, u.foto, u.username as username
+$sql = "SELECT p.id, p.pregunta, p.fecha_pregunta, p.fecha_edicion, p.editado, u.nombre, u.apellidos, u.foto, u.username as username
         FROM preguntas p
         JOIN usuarios u ON p.usuario = u.username
         WHERE u.username = ?
@@ -101,7 +115,7 @@ $conn->close();
     </div>
 
     <div id="preguntas">
-        <h2>Preguntas de <?php echo htmlspecialchars($usuario); ?></h2>
+        <h2>Preguntas de <?php echo htmlspecialchars($nombre_completo); ?></h2>
         <?php
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
@@ -119,10 +133,14 @@ $conn->close();
                 } else {
                     echo "<p>" . htmlspecialchars($row['nombre']) . ' ' . htmlspecialchars($row['apellidos']) . "</p>";
                 }
-                echo "<p>" . htmlspecialchars($row['fecha_pregunta']) . "</p>";
+                echo "<p>" . htmlspecialchars($row['fecha_pregunta']);
+                if ($row['editado']) {
+                    echo " • Editado el " . htmlspecialchars($row['fecha_edicion']);
+                }
+                echo "</p>";
                 echo "</div>"; // Cierre de div.user-details
                 echo "</div>"; // Cierre de div.user-info
-                echo "<h3>" . htmlspecialchars($row['pregunta']) . "</h3>";
+                echo "<h3>" . nl2br(htmlspecialchars($row['pregunta']) . "</h3>");
 
                 // Mostrar respuestas asociadas a la pregunta
                 if (isset($respuestas_por_pregunta[$row['id']])) {
@@ -144,7 +162,7 @@ $conn->close();
                         echo "<p>" . htmlspecialchars($respuesta['fecha_respuesta']) . "</p>";
                         echo "</div>"; // Cierre de div.user-details
                         echo "</div>"; // Cierre de div.user-info
-                        echo "<p>" . htmlspecialchars($respuesta['respuesta']) . "</p>";
+                        echo "<p>" . nl2br(htmlspecialchars($respuesta['respuesta']) . "</p>");
                         echo "</div>"; // Cierre de div.respuesta
                     }
                 }

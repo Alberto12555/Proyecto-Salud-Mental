@@ -28,7 +28,7 @@ if (isset($_SESSION['username'])) {
     $stmt->close();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nueva_pregunta'])) {
-      $nueva_pregunta = $conn->real_escape_string($_POST['nueva_pregunta']);
+      $nueva_pregunta = $_POST['nueva_pregunta'];
       $fecha_edicion = date("Y-m-d H:i:s");
       $sql_update = "UPDATE preguntas SET pregunta=?, fecha_edicion=?, editado=TRUE WHERE id=? AND usuario=?";
       $stmt_update = $conn->prepare($sql_update);
