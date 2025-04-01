@@ -47,9 +47,13 @@ Este blog tiene como objetivo proporcionar un espacio virtual para discutir tema
 ## ¿Cómo abrir el proyecto?
 - **1-Descarga e instala XAMPP** https://www.apachefriends.org/es/download.html
 - **2-Iniciar XAMPP** Habilita los modulos Apache y MySQL
-- **3-Ingresa la carpeta del proyecto a:** C:\xampp\htdocsC:\xampp\htdocs
+- **3-Ingresa la carpeta del proyecto a:** C:\xampp\htdocs
 - **4-Ingresa a phpmyadmin** http://localhost/phpmyadmin/
 - **5-Ejecuta las siguientes sentencias SQL** 
+
+CREATE DATABASE saludmental CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+
+USE saludmental;
 
 CREATE TABLE usuarios ( 
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
@@ -79,5 +83,5 @@ fecha_respuesta DATETIME NOT NULL,
 usuario VARCHAR(255) NOT NULL 
 );
 
-- **6-Ingresa en tu navegador a:** http://localhost/Proyecto-Salud-Mental/
+- **6-Ingresa en tu navegador a:** http://localhost/Proyecto-Salud-Mental-main/
 - **7- Listo. :D**
